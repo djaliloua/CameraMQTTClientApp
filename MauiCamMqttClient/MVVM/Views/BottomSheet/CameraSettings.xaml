@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+                   xmlns:local="clr-namespace:MauiCamMqttClient"
+                   x:Class="MauiCamMqttClient.MVVM.Views.BottomSheet.CameraSettings"
+                   BindingContext="{x:Static local:ServiceLocator.CameraSettingsViewModel}"
+                   >
+    <the49:BottomSheet.Detents>
+        <!-- Stop at the height of the screen -->
+        <the49:FullscreenDetent />
+        <!-- Stop at the height of the page content -->
+        <the49:ContentDetent />
+        <!-- Stop at 120dp -->
+        <the49:HeightDetent Height="120" />
+        <!-- Stop at 45% of the screen height -->
+        <the49:RatioDetent Ratio="0.45" />
+        <!-- Stop at the height of the divider view -->
+        <the49:AnchorDetent Anchor="{x:Reference divider}" />
+    </the49:BottomSheet.Detents>
+    <VerticalStackLayout Spacing="16"
+                         BackgroundColor="Beige">
+        <HorizontalStackLayout Spacing="20"
+                               HorizontalOptions="Center">
+            <Label Text="Flash"
+                   VerticalOptions="Center" />
+            <Switch IsToggled="{Binding IsFlash}"/>
+        </HorizontalStackLayout>
+        <BoxView x:Name="divider" />
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Flip"
+                   VerticalOptions="Center" />
+            <Switch IsToggled="{Binding Flip}"/>
+            
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Mirror"
+                   VerticalOptions="Center" />
+            <Switch IsToggled="{Binding Mirror}" />
+
+        </HorizontalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="Saturation"
+                   VerticalOptions="Center" />
+            <Slider Value="{Binding Saturation}"
+                    Minimum="-2"
+                    Maximum="2" />
+
+        </VerticalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="Brightness"
+                   VerticalOptions="Center" />
+            <Slider Value="{Binding Brightness}"
+                    Minimum="-2"
+                    Maximum="2" />
+
+        </VerticalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="Contrast"
+                   VerticalOptions="Center" />
+            <Slider Value="{Binding Contrast}"
+                    Minimum="-2"
+                    Maximum="2"
+                     />
+
+        </VerticalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label Text="Quality"
+                   VerticalOptions="Center" />
+            <Slider Value="{Binding Quality}"
+                    Minimum="10"
+                    Maximum="63" />
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</the49:BottomSheet>

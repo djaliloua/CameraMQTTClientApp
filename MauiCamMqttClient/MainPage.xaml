@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiCamMqttClient"
+             xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+             BindingContext="{x:Static local:ServiceLocator.MainViewModel}"
+             x:Class="MauiCamMqttClient.MainPage"
+             x:Name="this">
+    <ContentPage.Resources>
+        <the49:BottomSheet x:Key="sheet"
+                           x:Name="sheet"
+                           BindingContext="{x:Reference this}"
+                           IsCancelable="False"
+                           Padding="8">
+            <Grid ColumnDefinitions="*, Auto">
+                <Editor x:Name="editor"
+                        AutoSize="TextChanges" />
+                <Button Text="ggggg"
+                        
+                        Grid.Column="1"
+                        CornerRadius="22"
+                        HeightRequest="44"
+                        WidthRequest="44" />
+            </Grid>
+        </the49:BottomSheet>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New"
+                     Command="{Binding NewCommand}"
+                     Order="Primary" />
+        <ToolbarItem Text="Settings"
+                     Command="{Binding ShowCamSettingCommand}"
+                     Order="Secondary" />
+        <ToolbarItem Text="ShowAll"
+                     Command="{Binding ShowAllCommand}"
+                     Order="Secondary" />
+    </ContentPage.ToolbarItems>
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Picker x:Name="picker"
+                    ItemsSource="{Binding CameraComboBoxItemViewModel.Items}"
+                    SelectedItem="{Binding CameraComboBoxItemViewModel.SelectedItem}" />
+            <GraphicsView x:Name="VideoCanvas"
+                          ScaleX="1"
+                          Grid.Row="1"
+                          HeightRequest="250"
+                          WidthRequest="350">
+                <GraphicsView.GestureRecognizers>
+                    <PinchGestureRecognizer PinchUpdated="OnPinchUpdated"/>
+                    <TapGestureRecognizer Command="{Binding ShowCamSettingCommand}"
+                                          NumberOfTapsRequired="2" />
+                </GraphicsView.GestureRecognizers>
+            </GraphicsView>
+            <StackLayout Padding="20"
+                         Grid.Row="2"
+                         Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Spacing="20"
+                         VerticalOptions="Center">
+                <Button Text="Start Stream"
+                        Command="{Binding StartStreamCommand}" />
+                <Button Text="Stop Stream"
+                        Command="{Binding StopStreamCommand}"/>
+                <!--<HorizontalStackLayout>
+                    <Switch IsToggled="{Binding IsFlash}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    <Label Text="Flash"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>-->
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

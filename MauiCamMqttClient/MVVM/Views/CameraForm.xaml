@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCamMqttClient.MVVM.Views.CameraForm"
+             xmlns:local="clr-namespace:MauiCamMqttClient"
+             BindingContext="{x:Static local:ServiceLocator.CameraFormViewModel}"
+             x:Name="contentPage"
+             Title="Form">
+    <Grid BindingContext="{Binding CameraFrm}"
+          Margin="20"
+          RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Text="Name"
+               VerticalOptions="Center" />
+        <Entry Text="{Binding Name}"
+               Grid.Column="1"
+               VerticalOptions="Center" />
+        <Label Text="Host Name"
+               Grid.Row="1"
+               Grid.Column="0"
+               VerticalOptions="Center" />
+        <Entry Text="{Binding HostName}"
+               Grid.Column="2"
+               VerticalOptions="Center"
+               Grid.Row="1" />
+        <Label Text="Topic Name"
+               Grid.Row="2"
+               Grid.Column="0"
+               VerticalOptions="Center" />
+        <Entry Text="{Binding TopicName}"
+               Grid.Column="2"
+               VerticalOptions="Center"
+               Grid.Row="2" />
+        <HorizontalStackLayout HorizontalOptions="End"
+                               Grid.Row="3"
+                               Grid.ColumnSpan="2">
+            <CheckBox IsChecked="{Binding IsActive}" />
+            <Label Text="IsActive"
+                   VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <Button Grid.Row="4"
+                x:Name="btn"
+                Grid.ColumnSpan="2"
+                VerticalOptions="Center"
+                BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button"
+                             Binding="{Binding Source={x:Reference contentPage}, Path=BindingContext.IsSave}"
+                             Value="true">
+                    <Setter Property="IsVisible"
+                            Value="Visible" />
+                    <Setter Property="Text"
+                            Value="Add" />
+                    <Setter Property="Command"
+                            Value="{Binding AddCommand}" />
+                </DataTrigger>
+                <DataTrigger TargetType="Button"
+                             Binding="{Binding Source={x:Reference contentPage}, Path=BindingContext.IsSave}"
+                             Value="false">
+                    <Setter Property="IsVisible"
+                            Value="Visible" />
+                    <Setter Property="Text"
+                            Value="Update" />
+                    <Setter Property="Command"
+                            Value="{Binding UpdateCommand}" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
+    </Grid>
+</ContentPage>
