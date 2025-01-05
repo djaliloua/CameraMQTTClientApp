@@ -16,7 +16,7 @@ namespace MqttClientService
         {
             S_TopicName = cm.TopicName;
             HostName = cm.HostName;
-            Port = cm.Port;
+            Port = int.Parse(cm.Port);
             Credential = cm.Credential;
         }
         public MqttData()

@@ -59,7 +59,7 @@ namespace ViewModelLayer
             get => field;
             set => UpdateObservable(ref field, value);
         }
-        public int Port
+        public string Port
         {
             get => field;
             set => UpdateObservable(ref field, value);
@@ -71,6 +71,7 @@ namespace ViewModelLayer
         }
         public CameraViewModel()
         {
+            Port = "1883";
             Credential = new CredentialViewModel("your_username", "801490");
         }
 

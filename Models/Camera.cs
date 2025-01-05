@@ -10,7 +10,7 @@
         public string TopicName { get; set; }
         public string HostName { get; set; }
         public bool IsActive { get; set; }
-        public int Port { get; set; }
+        public string Port { get; set; }
         public virtual Credential Credential { get; set; }
         public override string ToString() => Name;
     }

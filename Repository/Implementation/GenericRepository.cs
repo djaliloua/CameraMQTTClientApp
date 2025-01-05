@@ -1,27 +1,28 @@
 ﻿using DatabaseContexts;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Repository.Interface;
 
 namespace Repository.Implementation
 {
-    public class GenericRepositoryViewModel<TVM, T> : GenericRepository<T>, IRepositoryViewModel<TVM, T> where T : class
+    public class GenericRepositoryViewModel<TSource, TDestination> : GenericRepository<TSource>, IRepositoryViewModel<TSource, TDestination> where TSource : class
     {
-        public virtual IList<TVM> GetAllToViewModel()
+        public virtual IList<TDestination> GetAllToViewModel()
         {
-            return _table.ToList().ToVM<T, TVM>();
+            return _table.ProjectToType<TDestination>().ToList();
         }
-        public virtual void Update(TVM entity)
+        public virtual void Update(TDestination entity)
         {
-            T obj = entity.FromVM<TVM, T>();
+            TSource obj = entity.FromVM<TDestination, TSource>();
             _dbContext.Update(obj);
             _dbContext.SaveChanges();
         }
-        public virtual TVM Save(TVM entity)
+        public virtual TDestination Save(TDestination entity)
         {
-            T obj = entity.FromVM<TVM, T>();
+            TSource obj = entity.FromVM<TDestination, TSource>();
             _table.Add(obj);
             _dbContext.SaveChanges();
-            return obj.ToVM<T, TVM>();
+            return obj.ToVM<TSource, TDestination>();
         }
     }
     public class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : class
@@ -33,7 +34,7 @@ namespace Repository.Implementation
         {
             _dbContext = new RepositoryContext();
             _table = _dbContext.Set<T>();
-            _dbContext.Database.EnsureCreated();
+            //_dbContext.Database.EnsureCreated();
         }
 
         public virtual void Delete(object id)

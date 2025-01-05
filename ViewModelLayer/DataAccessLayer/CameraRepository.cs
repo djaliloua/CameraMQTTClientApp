@@ -3,7 +3,7 @@ using Repository.Implementation;
 
 namespace ViewModelLayer.DataAccessLayer
 {
-    public class CameraRepository : GenericRepositoryViewModel<CameraViewModel, Camera>
+    public class CameraRepository : GenericRepositoryViewModel<Camera, CameraViewModel>
     {
 
     }

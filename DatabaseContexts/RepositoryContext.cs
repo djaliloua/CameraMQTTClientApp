@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Models;
 
 namespace DatabaseContexts
@@ -12,11 +13,13 @@ namespace DatabaseContexts
         public RepositoryContext()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            DatabasePurchase = Path.Combine(appDataPath, "CameraSettings2.db3");
+            DatabasePurchase = Path.Combine(appDataPath, "camerasettings_10.db3");
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={DatabasePurchase}");
+            optionsBuilder
+                .UseSqlite($"Data Source={DatabasePurchase}")
+                .LogTo(Console.WriteLine, LogLevel.Information);
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.ConfigureWarnings(warn => warn.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
         }
