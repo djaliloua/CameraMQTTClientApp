@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCamMqttClient.MVVM.Views.BottomSheet.CamParameters">
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />
+        </Style>
+        <Style TargetType="Switch">
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />
+        </Style>
+    </ContentView.Resources>
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--Flash-->
+        <Label Text="Flash"
+               Grid.Row="0"
+               Grid.Column="0" />
+        <Switch IsToggled="{Binding IsFlash}"
+                Grid.Row="0"
+                Grid.Column="1" />
+        <!--Flip-->
+        <Label Text="Flip"
+               
+               Grid.Row="1"
+               Grid.Column="0" />
+        <Switch IsToggled="{Binding Flip}"
+                Grid.Row="1"
+                Grid.Column="1" />
+        <!--Mirror-->
+        <Label Text="Mirror"
+               
+               Grid.Row="2"
+               Grid.Column="0" />
+        <Switch IsToggled="{Binding Mirror}"
+                Grid.Row="2"
+                Grid.Column="1" />
+        <!--Saturation-->
+        <Label Text="Saturation"
+               Grid.Row="3"
+               Grid.Column="0" />
+        <Slider Value="{Binding Saturation}"
+                Minimum="-2"
+                Maximum="2"
+                Grid.Row="3"
+                Grid.Column="1" />
+        <!--Brightness-->
+        <Label Text="Brightness"
+               Grid.Row="4"
+               Grid.Column="0" />
+        <Slider Value="{Binding Brightness}"
+                Minimum="-2"
+                Maximum="2"
+                Grid.Row="4"
+                Grid.Column="1" />
+        <!--Contrast-->
+        <Label Text="Contrast"
+               Grid.Row="5"
+               Grid.Column="0" />
+        <Slider Value="{Binding Contrast}"
+                Minimum="-2"
+                Maximum="2"
+                Grid.Row="5"
+                Grid.Column="1" />
+        <!--Quality-->
+        <Label Text="Quality"
+               Grid.Row="6"
+               Grid.Column="0" />
+        <Slider Value="{Binding Quality}"
+                Minimum="10"
+                Maximum="63"
+                Grid.Row="6"
+                Grid.Column="1" />
+    </Grid>
+</ContentView>

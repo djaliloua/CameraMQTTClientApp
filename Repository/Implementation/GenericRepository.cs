@@ -34,7 +34,10 @@ namespace Repository.Implementation
         {
             _dbContext = new RepositoryContext();
             _table = _dbContext.Set<T>();
-            //_dbContext.Database.EnsureCreated();
+            if(OperatingSystem.IsAndroid())
+            {
+                _dbContext.Database.EnsureCreated();
+            }
         }
 
         public virtual void Delete(object id)

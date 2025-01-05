@@ -110,6 +110,9 @@
 	  <MauiXaml Update="MVVM\Views\BottomSheet\CameraSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\BottomSheet\CamParameters.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\CameraForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
