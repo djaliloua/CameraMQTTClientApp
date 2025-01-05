@@ -1,9 +1,11 @@
-﻿namespace MauiCamMqttClient.MVVM.ViewModels
+﻿using MqttClientService;
+using ViewModelLayer;
+
+namespace MauiCamMqttClient.MVVM.ViewModels
 {
     public class CameraSettingsViewModel:BaseViewModel
     {
         private readonly IMqttService _mqttService;
-        private const int Port = 1883;
         public bool IsFlash
         {
             get => field;
@@ -88,19 +90,22 @@
         }
         private string getTopicName()
         {
-            string[] topicName = ServiceLocator.CameraComboBoxItemViewModel.SelectedItem.TopicName.Split('/');
+            string[] topicName = ServiceLocator.CameraComboBoxItemViewModel.Items.SelectedItem.TopicName.Split('/');
 
             return topicName[topicName.Length - 1];
         }   
         private async Task<bool> publishMQTTMessage(string topicHead, string message)
         {
             bool isPublished;
-            if (!ServiceLocator.CameraComboBoxItemViewModel.IsSelected)
+            if (!ServiceLocator.CameraComboBoxItemViewModel.Items.IsSelected)
             {
                 await Shell.Current.DisplayAlert("Error", "Please select a camera", "OK");
                 return false;
             }
-            isPublished = await _mqttService.Publish($"camera/{getTopicName()}/{topicHead}", message, ServiceLocator.CameraComboBoxItemViewModel.SelectedItem.HostName, Port);
+            MqttData mqttData = new MqttData(ServiceLocator.CameraComboBoxItemViewModel.Items.SelectedItem);
+            mqttData.P_TopicName = $"camera/{getTopicName()}/{topicHead}";
+            mqttData.Message = message;
+            isPublished = await _mqttService.Publish(mqttData);
             if (!isPublished)
             {
                 await Shell.Current.DisplayAlert("Error", "Failed to publish the message. Please connect it first", "OK");

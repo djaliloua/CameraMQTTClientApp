@@ -7,11 +7,12 @@ namespace DatabaseContexts
     public class RepositoryContext : DbContext
     {
         public DbSet<Camera> Cameras { get; set; }
-        private string DatabasePurchase;
+        public DbSet<Credential> Credentials { get; set; }
+        private readonly string DatabasePurchase;
         public RepositoryContext()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            DatabasePurchase = Path.Combine(appDataPath, "my_database.db3");
+            DatabasePurchase = Path.Combine(appDataPath, "CameraSettings2.db3");
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

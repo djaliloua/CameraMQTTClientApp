@@ -24,13 +24,13 @@
                                 <SwipeItem Text="Update"
                                            CommandParameter="{Binding Source={x:Reference grid}, Path=BindingContext}"
                                            BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}"
-                                           Command="{Binding ListOfCamera.UpdateCommand}" />
+                                           Command="{Binding UpdateCommand}" />
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
                                 <SwipeItem Text="Delete"
                                            CommandParameter="{Binding Source={x:Reference grid}, Path=BindingContext}"
                                            BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}"
-                                           Command="{Binding ListOfCamera.DeleteCommand}" />
+                                           Command="{Binding DeleteCommand}" />
                             </SwipeView.LeftItems>
                             <Frame CornerRadius="0"
                                    HasShadow="True"

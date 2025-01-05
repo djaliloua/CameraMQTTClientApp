@@ -43,8 +43,8 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Picker x:Name="picker"
-                    ItemsSource="{Binding CameraComboBoxItemViewModel.Items}"
-                    SelectedItem="{Binding CameraComboBoxItemViewModel.SelectedItem}" />
+                    ItemsSource="{Binding CameraComboBoxItemViewModel.Items.Items}"
+                    SelectedItem="{Binding CameraComboBoxItemViewModel.Items.SelectedItem}" />
             <GraphicsView x:Name="VideoCanvas"
                           ScaleX="1"
                           Grid.Row="1"

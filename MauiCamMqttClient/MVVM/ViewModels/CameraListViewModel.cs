@@ -1,13 +1,40 @@
-﻿using static MauiCamMqttClient.MVVM.ViewModels.CameraViewModel;
+﻿using MauiCamMqttClient.MVVM.Views;
+using System.Windows.Input;
+using ViewModelLayer;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {
     public class CameraListViewModel : BaseViewModel
     {
-        public CameraComboBoxItemViewModel ListOfCamera { get; private set; }
+        public CollectionViewModel ListOfCamera { get; private set; }
+        public ICommand UpdateCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
         public CameraListViewModel()
         {
-            ListOfCamera = ServiceLocator.CameraComboBoxItemViewModel;
+            ListOfCamera = ServiceLocator.CollectionViewModel;
+            UpdateCommand = new Command(OnUpdate);
+            DeleteCommand = new Command(OnDelete);
+        }
+
+        private async void OnDelete(object parameter)
+        {
+            CameraViewModel cameraViewModel = (CameraViewModel)parameter;
+            bool result = await Shell.Current.DisplayAlert("Info", $"Do you want to delete {cameraViewModel.Name}", "Yes", "No");
+            if (result)
+            {
+                ListOfCamera.Delete(cameraViewModel);
+            }
+        }
+
+        private async void OnUpdate(object parameter)
+        {
+            CameraViewModel viewModel = parameter as CameraViewModel;
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                {"IsSave", false },
+                {"CamVM", viewModel.Clone() },
+            };
+            await Shell.Current.GoToAsync(nameof(CameraForm), parameters);
         }
     }
 }

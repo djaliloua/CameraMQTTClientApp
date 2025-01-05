@@ -1,15 +1,17 @@
 ﻿using Mapster;
 using MauiCamMqttClient.MVVM.ViewModels;
 using Models;
+using MqttClientService;
 using Patterns.Abstractions;
-using static MauiCamMqttClient.MVVM.ViewModels.CameraViewModel;
+using ViewModelLayer;
 
 namespace MauiCamMqttClient.Extensions
 {
     public static class ViewModelExtensions
     {
-        public static CameraViewModel ToDto(this Camera item) => item.Adapt<CameraViewModel>();
-        public static Camera FromDto(this CameraViewModel item) => item.Adapt<Camera>();
+        public static CameraViewModel ToViewModel(this Camera item) => item.Adapt<CameraViewModel>();
+        public static Camera FromViewModel(this CameraViewModel item) => item.Adapt<Camera>();
+        public static TDestination ToViewModel<TSource, TDestination>(this TSource model) => model.Adapt<TDestination>();
         public static IList<TDestination> ToVM<TSource, TDestination>(this IList<TSource> model) => model.Adapt<List<TDestination>>();
     }
     public static class Extensions
@@ -44,6 +46,7 @@ namespace MauiCamMqttClient.Extensions
             mauiAppBuilder.Services.AddSingleton<CameraFormViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraListViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraSettingsViewModel>();
+            mauiAppBuilder.Services.AddSingleton<CollectionViewModel>();
 
             return mauiAppBuilder;
         }

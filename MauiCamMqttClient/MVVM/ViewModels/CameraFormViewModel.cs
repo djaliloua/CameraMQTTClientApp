@@ -1,7 +1,5 @@
-﻿using MauiCamMqttClient.DataAccess.Implementation;
-using MauiCamMqttClient.Extensions;
-using Models;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using ViewModelLayer;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {
@@ -33,10 +31,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         {
             if (CameraFrm.Error == null)
             {
-                ServiceLocator.CameraComboBoxItemViewModel.UpdateItem(CameraFrm);
-                using CameraRepository cameraRepository = new CameraRepository();
-                Camera cam = cameraRepository.Update(CameraFrm.FromDto());
-                ServiceLocator.CameraComboBoxItemViewModel.UpdateItem(cam.ToDto());
+                ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
                 await Shell.Current.GoToAsync("..");
             }
             else
@@ -50,9 +45,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             {
                 if (!CheckDuplicateName(CameraFrm.Name))
                 {
-                    using CameraRepository cameraRepository = new CameraRepository();
-                    Camera cam = cameraRepository.Save(CameraFrm.FromDto());
-                    ServiceLocator.CameraComboBoxItemViewModel.AddItem(cam.ToDto());
+                    ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
                     await Shell.Current.GoToAsync("..");
                 }
                 else
@@ -69,7 +62,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         }
         private static bool CheckDuplicateName(string name)
         {
-            CameraViewModel viewModel = ServiceLocator.CameraComboBoxItemViewModel.Items.FirstOrDefault(x => x.Name.Trim().ToLower() == name.Trim().ToLower());
+            CameraViewModel viewModel = ServiceLocator.CameraComboBoxItemViewModel.Items.Items.FirstOrDefault(x => x.Name.Trim().ToLower() == name.Trim().ToLower());
             return viewModel != null;
         }
 

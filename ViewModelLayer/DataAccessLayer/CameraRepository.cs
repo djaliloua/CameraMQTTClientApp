@@ -1,9 +1,7 @@
-﻿using MauiCamMqttClient.MVVM.ViewModels;
-using Models;
+﻿using Models;
 using Repository.Implementation;
-using ViewModelLayer;
 
-namespace MauiCamMqttClient.DataAccess.Implementation
+namespace ViewModelLayer.DataAccessLayer
 {
     public class CameraRepository : GenericRepositoryViewModel<CameraViewModel, Camera>
     {

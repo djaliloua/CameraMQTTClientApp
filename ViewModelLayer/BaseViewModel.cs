@@ -1,9 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
-namespace MauiCamMqttClient.MVVM.ViewModels
+namespace ViewModelLayer
 {
+    public static class Utility
+    {
+        public static T DeepCopy<T>(T obj)
+        {
+            if (obj == null)
+                return default;
+
+            var json = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve });
+            return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve });
+        }
+    }
     public interface IClone<T>
     {
         public T Clone();
@@ -63,7 +76,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             {
                 return;
             }
-            OriginalObject = Utility.Utility.DeepCopy(this as T);
+            OriginalObject = Utility.DeepCopy(this as T);
             IsEdit = true;
         }
         public virtual void CancelEdit()

@@ -83,14 +83,15 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
-		<PackageReference Include="MQTTnet" Version="5.0.0.1214-RC" />
 		<PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
 		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Models\Models.csproj" />
+	  <ProjectReference Include="..\MqttClientService\MqttClientService.csproj" />
 	  <ProjectReference Include="..\Repository\Repository.csproj" />
+	  <ProjectReference Include="..\ViewModelLayer\ViewModelLayer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

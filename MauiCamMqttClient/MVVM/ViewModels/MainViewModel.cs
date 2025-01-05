@@ -1,7 +1,8 @@
 ﻿using MauiCamMqttClient.MVVM.Views;
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
+using MqttClientService;
 using System.Windows.Input;
-using static MauiCamMqttClient.MVVM.ViewModels.CameraViewModel;
+using ViewModelLayer;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {
@@ -49,7 +50,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         {
             try
             {
-                if (!CameraComboBoxItemViewModel.IsSelected)
+                if (!CameraComboBoxItemViewModel.Items.IsSelected)
                 {
                     await Shell.Current.DisplayAlert("Error", "Please select a camera", "OK");
                     return;
@@ -68,13 +69,13 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         {
             try
             {
-                if (!CameraComboBoxItemViewModel.IsSelected)
+                if (!CameraComboBoxItemViewModel.Items.IsSelected)
                 {
                     await Shell.Current.DisplayAlert("Error", "Please select a camera", "OK");
                     return;
                 }
-                await _mqttService.ConnectAsync(CameraComboBoxItemViewModel.SelectedItem.HostName, Port, CameraComboBoxItemViewModel.SelectedItem.TopicName);
-                //await DisplayAlert("Success", "Connected to the stream!", "OK");
+                MqttData mqttData = new MqttData(CameraComboBoxItemViewModel.Items.SelectedItem);
+                await _mqttService.ConnectAsync(mqttData);
             }
             catch (Exception ex)
             {

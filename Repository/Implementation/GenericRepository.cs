@@ -10,6 +10,19 @@ namespace Repository.Implementation
         {
             return _table.ToList().ToVM<T, TVM>();
         }
+        public virtual void Update(TVM entity)
+        {
+            T obj = entity.FromVM<TVM, T>();
+            _dbContext.Update(obj);
+            _dbContext.SaveChanges();
+        }
+        public virtual TVM Save(TVM entity)
+        {
+            T obj = entity.FromVM<TVM, T>();
+            _table.Add(obj);
+            _dbContext.SaveChanges();
+            return obj.ToVM<T, TVM>();
+        }
     }
     public class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : class
     {

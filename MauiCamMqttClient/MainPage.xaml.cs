@@ -1,4 +1,5 @@
-﻿#if ANDROID
+﻿using MqttClientService;
+#if ANDROID
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
 using MauiCamMqttClient.Platforms.Android;
 using System.Diagnostics;
