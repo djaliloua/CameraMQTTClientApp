@@ -44,10 +44,21 @@ namespace MqttClientService
 
         public async Task ConnectAsync(MqttData vm)
         {
-            var options = new MqttClientOptionsBuilder()
-                .WithTcpServer(vm.HostName, vm.Port)
-                .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
-                .Build();
+            MqttClientOptions options;
+            if(vm.Credential.IsValidate())
+            {
+                options = new MqttClientOptionsBuilder()
+                    .WithTcpServer(vm.HostName, vm.Port)
+                    .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
+                    .Build();
+            }
+            else
+            {
+                options = new MqttClientOptionsBuilder()
+                    .WithTcpServer(vm.HostName, vm.Port)
+                    .Build();
+            }
+            
 
             _mqttClient.ApplicationMessageReceivedAsync += mqttClient_ApplicationMessageReceivedAsync;
 
@@ -72,10 +83,6 @@ namespace MqttClientService
 
         public async Task<bool> Publish(MqttData vm)
         {
-            var mqttClientOptions = new MqttClientOptionsBuilder()
-                    .WithTcpServer(vm.HostName, vm.Port)
-                    .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
-                    .Build();
             if (!_mqttClient.IsConnected)
             {
                 return false;

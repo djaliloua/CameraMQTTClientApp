@@ -26,6 +26,14 @@ namespace ViewModelLayer
         {
             
         }
+        public bool IsValidate()
+        {
+            if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
+            {
+                return false;
+            }
+            return true;
+        }
     }
     public class CameraViewModel : BaseViewModel, IDataErrorInfo, IClone<CameraViewModel>
     {
