@@ -109,6 +109,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             if (!isPublished)
             {
                 await Shell.Current.DisplayAlert("Error", "Failed to publish the message. Please connect it first", "OK");
+                return false;
             }
             return true;
         }

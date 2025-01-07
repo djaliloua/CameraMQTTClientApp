@@ -29,6 +29,7 @@ namespace MqttClientService
         Task ConnectAsync(MqttData vm);
         Task DisconnectAsync();
         Task<bool> Publish(MqttData vm);
+        bool IsConnected();
         event Action<byte[]> OnImageReceived;
     }
     public class MqttService : IMqttService
@@ -94,6 +95,11 @@ namespace MqttClientService
 
             await _mqttClient.PublishAsync(applicationMessage, CancellationToken.None);
             return true;
+        }
+
+        public bool IsConnected()
+        {
+            return _mqttClient.IsConnected;
         }
     }
 }

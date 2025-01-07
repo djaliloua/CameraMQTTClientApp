@@ -7,12 +7,22 @@ namespace ViewModelLayer
 {
     public class CredentialViewModel:BaseViewModel
     {
+        public int Id
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
         public string UserName
         {
             get => field;
             set => UpdateObservable(ref field, value);
         }
         public string Password
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public int CameraId
         {
             get => field;
             set => UpdateObservable(ref field, value);
