@@ -50,6 +50,7 @@ namespace MqttClientService
             {
                 options = new MqttClientOptionsBuilder()
                     .WithTcpServer(vm.HostName, vm.Port)
+                    .WithClientId("djalilou")
                     .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
                     .Build();
             }

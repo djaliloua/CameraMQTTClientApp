@@ -198,4 +198,47 @@ namespace ViewModelLayer
             }
         }
     }
+    public class MQTTConfigViewModel:BaseViewModel
+    {
+        public int Id
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public Guid CameraId
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public string HostName
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public string Port
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public string UserName
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public string Password
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public string BaseTopicName
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+        public MQTTConfigViewModel()
+        {
+            Port = "1883";
+            CameraId = Guid.NewGuid();
+        }
+    }
 }

@@ -1,0 +1,6 @@
+@MQTTConfigWebApi_HostAddress = http://localhost:5094
+
+GET {{MQTTConfigWebApi_HostAddress}}/MqttConfig/
+Accept: application/json
+
+###

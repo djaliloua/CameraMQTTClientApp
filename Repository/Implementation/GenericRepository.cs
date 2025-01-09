@@ -39,6 +39,15 @@ namespace Repository.Implementation
                 _dbContext.Database.EnsureCreated();
             }
         }
+        public GenericRepository(DbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _table = _dbContext.Set<T>();
+            if (OperatingSystem.IsAndroid())
+            {
+                _dbContext.Database.EnsureCreated();
+            }
+        }
 
         public virtual void Delete(object id)
         {

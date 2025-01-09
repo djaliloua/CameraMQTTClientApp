@@ -9,7 +9,7 @@ namespace DatabaseContexts
     public class RepositoryContext : DbContext
     {
         public DbSet<Camera> Cameras { get; set; }
-        public DbSet<Credential> Credentials { get; set; }
+        public DbSet<MQTTCredential> Credentials { get; set; }
         private readonly string DatabasePurchase;
         public RepositoryContext()
         {
