@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatabaseContexts.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(MQTTConfigContext))]
     [Migration("20250105151543_change_file_name_")]
     partial class change_file_name_
     {

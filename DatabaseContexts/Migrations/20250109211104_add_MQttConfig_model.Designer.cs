@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatabaseContexts.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(MQTTConfigContext))]
     [Migration("20250109211104_add_MQttConfig_model")]
     partial class add_MQttConfig_model
     {

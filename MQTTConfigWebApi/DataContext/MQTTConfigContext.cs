@@ -5,21 +5,21 @@ using Models;
 
 namespace MQTTConfigWebApi.DataContext
 {
-    public class MQTTConfigContext : DbContext
-    {
-        public DbSet<MQTTConfig> MQTTConfigs { get; set; }
-        public MQTTConfigContext()
-        {
+    //public class MQTTConfigContext : DbContext
+    //{
+    //    public DbSet<MQTTConfig> MQTTConfigs { get; set; }
+    //    public MQTTConfigContext()
+    //    {
             
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            IConfiguration Configuration = new ConfigurationBuilder()
-                .AddUserSecrets<MQTTConfigContext>()
-                .Build();
-            optionsBuilder
-                .UseSqlite(Configuration["connectionString"]);
-            optionsBuilder.ConfigureWarnings(warn => warn.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
-        }
-    }
+    //    }
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //    {
+    //        IConfiguration Configuration = new ConfigurationBuilder()
+    //            .AddUserSecrets<MQTTConfigContext>()
+    //            .Build();
+    //        optionsBuilder
+    //            .UseSqlite(Configuration["connectionString"]);
+    //        optionsBuilder.ConfigureWarnings(warn => warn.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
+    //    }
+    //}
 }

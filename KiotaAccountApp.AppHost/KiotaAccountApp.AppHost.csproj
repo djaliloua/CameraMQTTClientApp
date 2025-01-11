@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IdentityServerApp\IdentityServerApp.csproj" />
     <ProjectReference Include="..\MQTTConfigWebApi\MQTTConfigWebApi.csproj" />
   </ItemGroup>
 

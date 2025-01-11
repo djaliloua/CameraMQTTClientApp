@@ -18,7 +18,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
 
         private async void OnDelete(object parameter)
         {
-            CameraViewModel cameraViewModel = (CameraViewModel)parameter;
+            MQTTConfigViewModel cameraViewModel = (MQTTConfigViewModel)parameter;
             bool result = await Shell.Current.DisplayAlert("Info", $"Do you want to delete {cameraViewModel.Name}", "Yes", "No");
             if (result)
             {
@@ -28,7 +28,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
 
         private async void OnUpdate(object parameter)
         {
-            CameraViewModel viewModel = parameter as CameraViewModel;
+            MQTTConfigViewModel viewModel = parameter as MQTTConfigViewModel;
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
                 {"IsSave", false },

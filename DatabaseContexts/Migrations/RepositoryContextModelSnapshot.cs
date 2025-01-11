@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatabaseContexts.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(MQTTConfigContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -20,32 +20,6 @@ namespace DatabaseContexts.Migrations
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
-
-            modelBuilder.Entity("Models.Camera", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("HostName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Port")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TopicName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cameras");
-                });
 
             modelBuilder.Entity("Models.MQTTConfig", b =>
                 {
@@ -62,6 +36,12 @@ namespace DatabaseContexts.Migrations
                     b.Property<string>("HostName")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
@@ -74,45 +54,6 @@ namespace DatabaseContexts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MQTTConfigs");
-                });
-
-            modelBuilder.Entity("Models.MQTTCredential", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CameraId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CameraId")
-                        .IsUnique();
-
-                    b.ToTable("Credentials");
-                });
-
-            modelBuilder.Entity("Models.MQTTCredential", b =>
-                {
-                    b.HasOne("Models.Camera", "Camera")
-                        .WithOne("Credential")
-                        .HasForeignKey("Models.MQTTCredential", "CameraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Camera");
-                });
-
-            modelBuilder.Entity("Models.Camera", b =>
-                {
-                    b.Navigation("Credential");
                 });
 #pragma warning restore 612, 618
         }

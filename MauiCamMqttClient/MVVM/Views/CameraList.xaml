@@ -49,7 +49,7 @@
                                            HorizontalOptions="Start"
                                            VerticalTextAlignment="Center"
                                            VerticalOptions="Center" />
-                                    <Label Text="{Binding TopicName}"
+                                    <Label Text="{Binding BaseTopicName}"
                                            Grid.Column="1"
                                            HorizontalOptions="Center"
                                            VerticalTextAlignment="Center"

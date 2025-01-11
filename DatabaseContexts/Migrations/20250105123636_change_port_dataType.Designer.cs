@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatabaseContexts.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(MQTTConfigContext))]
     [Migration("20250105123636_change_port_dataType")]
     partial class change_port_dataType
     {

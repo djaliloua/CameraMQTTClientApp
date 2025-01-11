@@ -19,6 +19,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -42,7 +43,7 @@
                Grid.Row="2"
                Grid.Column="0"
                VerticalOptions="Center" />
-        <Entry Text="{Binding TopicName}"
+        <Entry Text="{Binding BaseTopicName}"
                Grid.Column="2"
                VerticalOptions="Center"
                Grid.Row="2" />
@@ -59,7 +60,7 @@
                Grid.Row="4"
                Grid.Column="0"
                VerticalOptions="Center" />
-        <Entry Text="{Binding Credential.UserName}"
+        <Entry Text="{Binding UserName}"
                Grid.Column="1"
                VerticalOptions="Center"
                Grid.Row="4" />
@@ -67,19 +68,27 @@
                Grid.Row="5"
                Grid.Column="0"
                VerticalOptions="Center" />
-        <Entry Text="{Binding Credential.Password}"
+        <Entry Text="{Binding Password}"
                Grid.Column="1"
                VerticalOptions="Center"
                Grid.Row="5" />
+        <Label Text="CameraId"
+               Grid.Row="6"
+               Grid.Column="0"
+               VerticalOptions="Center" />
+        <Entry Text="{Binding CameraId}"
+               Grid.Column="1"
+               VerticalOptions="Center"
+               Grid.Row="6" />
         <HorizontalStackLayout HorizontalOptions="End"
-                               Grid.Row="6"
+                               Grid.Row="7"
                                Grid.ColumnSpan="2">
             <CheckBox IsChecked="{Binding IsActive}" />
             <Label Text="IsActive"
                    VerticalOptions="Center" />
         </HorizontalStackLayout>
 
-        <Button Grid.Row="7"
+        <Button Grid.Row="8"
                 x:Name="btn"
                 Grid.ColumnSpan="2"
                 VerticalOptions="Center"

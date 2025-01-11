@@ -1,0 +1,1 @@
+kiota generate -l CSharp -c MQTTConfigClient -n MQTTConfigApiConsume.Client -d ./mqttconfig-api.yml -o ./Client

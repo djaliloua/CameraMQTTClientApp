@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using DataAccessLayer.Implementation;
+using DatabaseContexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using MQTTConfigWebApi.DataContext;
-using MQTTConfigWebApi.Repo;
 
 namespace MQTTConfigWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[Authorize]
     public class MqttConfigController : ControllerBase
     {
         private readonly ILogger<MqttConfigController> _logger;
@@ -18,12 +19,29 @@ namespace MQTTConfigWebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<MQTTConfig> GetAll()
         {
-            using var _repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var _repository = new MQTTConfigRepository();
             return _repository.GetAll();
         }
+        [HttpGet("app/{guid}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<MQTTConfig>> GetMQTTConfigByGuid(Guid guid)
+        {
+            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            var config = await repository.GetValueByGuidAsync(guid);
+
+            if (config == null)
+            {
+                return NotFound();
+            }
+
+            return config;
+        }
+
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> GetMQTTConfigById(int id)
         {
             using var repository = new MQTTConfigRepository(new MQTTConfigContext());
@@ -37,6 +55,7 @@ namespace MQTTConfigWebApi.Controllers
             return config;
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> PostMQTTConfig(MQTTConfig purchase)
         {
             using var repository = new MQTTConfigRepository(new MQTTConfigContext());
@@ -44,6 +63,7 @@ namespace MQTTConfigWebApi.Controllers
             return purchase;
         }
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteMQTTConfig(int id)
         {
             using var repository = new MQTTConfigRepository(new MQTTConfigContext());
@@ -51,10 +71,11 @@ namespace MQTTConfigWebApi.Controllers
 
             return NoContent();
         }
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchMQTTConfig(int id, [FromBody] JsonPatchDocument<MQTTConfig> patchDoc)
+        [HttpPut("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<MQTTConfig>> PutMQTTConfig(int id, MQTTConfig model)
         {
-            if (patchDoc == null)
+            if (model.Id != id)
             {
                 return BadRequest();
             }
@@ -67,7 +88,8 @@ namespace MQTTConfigWebApi.Controllers
                 return NotFound();
             }
 
-            patchDoc.ApplyTo(config);
+            config.Update(model);
+            await repository.UpdateAsync(config);
 
             if (!ModelState.IsValid)
             {
@@ -76,7 +98,7 @@ namespace MQTTConfigWebApi.Controllers
 
             await repository.UpdateAsync(config);
 
-            return NoContent();
+            return config;
 
         }
     }

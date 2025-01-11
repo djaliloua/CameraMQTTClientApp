@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MauiCamMqttClient.MVVM.ViewModels;
+using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using Models;
 using MqttClientService;
 using Patterns.Abstractions;
@@ -9,8 +10,8 @@ namespace MauiCamMqttClient.Extensions
 {
     public static class ViewModelExtensions
     {
-        public static CameraViewModel ToViewModel(this Camera item) => item.Adapt<CameraViewModel>();
-        public static Camera FromViewModel(this CameraViewModel item) => item.Adapt<Camera>();
+        public static MQTTConfigViewModel ToViewModel(this MQTTConfig item) => item.Adapt<MQTTConfigViewModel>();
+        public static MQTTConfig FromViewModel(this MQTTConfigViewModel item) => item.Adapt<MQTTConfig>();
         public static TDestination ToViewModel<TSource, TDestination>(this TSource model) => model.Adapt<TDestination>();
         public static IList<TDestination> ToVM<TSource, TDestination>(this IList<TSource> model) => model.Adapt<List<TDestination>>();
     }
@@ -40,13 +41,14 @@ namespace MauiCamMqttClient.Extensions
         }
         public static MauiAppBuilder ViewModelsExtension(this MauiAppBuilder mauiAppBuilder)
         {
-            mauiAppBuilder.Services.AddSingleton<CameraViewModel>();
+            mauiAppBuilder.Services.AddSingleton<MQTTConfigViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraComboBoxItemViewModel>();
             mauiAppBuilder.Services.AddSingleton<MainViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraFormViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraListViewModel>();
             mauiAppBuilder.Services.AddSingleton<CameraSettingsViewModel>();
             mauiAppBuilder.Services.AddSingleton<CollectionViewModel>();
+            mauiAppBuilder.Services.AddSingleton<MQTTConfigFormViewModel>();
 
             return mauiAppBuilder;
         }
@@ -58,7 +60,7 @@ namespace MauiCamMqttClient.Extensions
         }
         public static MauiAppBuilder LoadBIExtension(this MauiAppBuilder mauiAppBuilder)
         {
-            mauiAppBuilder.Services.AddScoped<ILoadService<CameraViewModel>, LoadCameraService>();
+            mauiAppBuilder.Services.AddScoped<ILoadService<MQTTConfigViewModel>, LoadCameraService>();
 
 
             return mauiAppBuilder;

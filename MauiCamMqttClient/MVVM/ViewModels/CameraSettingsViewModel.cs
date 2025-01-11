@@ -90,7 +90,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         }
         private string getTopicName()
         {
-            string[] topicName = ServiceLocator.CameraComboBoxItemViewModel.Items.SelectedItem.TopicName.Split('/');
+            string[] topicName = ServiceLocator.CameraComboBoxItemViewModel.Items.SelectedItem.BaseTopicName.Split('/');
 
             return topicName[topicName.Length - 1];
         }   

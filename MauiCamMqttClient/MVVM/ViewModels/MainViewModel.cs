@@ -1,6 +1,7 @@
 ﻿using MauiCamMqttClient.MVVM.Views;
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
 using MqttClientService;
+using System.Diagnostics;
 using System.Windows.Input;
 using ViewModelLayer;
 
@@ -85,7 +86,23 @@ namespace MauiCamMqttClient.MVVM.ViewModels
 
         private async void OnShowAll(object parameter)
         {
-            await Shell.Current.GoToAsync(nameof(CameraList));
+            if (!Debugger.IsAttached)
+            {
+                FingerPrintAuthentification _authentification = new FingerPrintAuthentification();
+                if(await _authentification.Authenticated())
+                {
+                    await Shell.Current.GoToAsync(nameof(CameraList));
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", "You are not authenticated", "OK");
+                }
+            }
+            else
+            {
+                await Shell.Current.GoToAsync(nameof(CameraList));
+            }
+            
         }
 
         private async void OnNew(object parameter)
@@ -93,7 +110,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
                 {"IsSave", true },
-                {"CamVM", new CameraViewModel() },
+                {"CamVM", new MQTTConfigViewModel() },
             };
             await Shell.Current.GoToAsync(nameof(CameraForm), parameters);
         }
