@@ -12,24 +12,26 @@ namespace MQTTConfigWebApi.Controllers
     public class MqttConfigController : ControllerBase
     {
         private readonly ILogger<MqttConfigController> _logger;
+        private readonly MQTTConfigContext _context;
 
-        public MqttConfigController(ILogger<MqttConfigController> logger)
+        public MqttConfigController(ILogger<MqttConfigController> logger, MQTTConfigContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IEnumerable<MQTTConfig> GetAll()
         {
-            using var _repository = new MQTTConfigRepository();
+            using var _repository = new MQTTConfigRepository(_context);
             return _repository.GetAll();
         }
         [HttpGet("app/{guid}")]
         [AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> GetMQTTConfigByGuid(Guid guid)
         {
-            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var repository = new MQTTConfigRepository(_context);
             var config = await repository.GetValueByGuidAsync(guid);
 
             if (config == null)
@@ -44,7 +46,7 @@ namespace MQTTConfigWebApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> GetMQTTConfigById(int id)
         {
-            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var repository = new MQTTConfigRepository(_context);
             var config = await repository.GetValueAsync(id);
 
             if (config == null)
@@ -58,7 +60,7 @@ namespace MQTTConfigWebApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> PostMQTTConfig(MQTTConfig purchase)
         {
-            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var repository = new MQTTConfigRepository(_context);
             purchase = await repository.SaveAsync(purchase);
             return purchase;
         }
@@ -66,7 +68,7 @@ namespace MQTTConfigWebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> DeleteMQTTConfig(int id)
         {
-            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var repository = new MQTTConfigRepository(_context);
             await repository.DeleteAsync(id);
 
             return NoContent();
@@ -80,7 +82,7 @@ namespace MQTTConfigWebApi.Controllers
                 return BadRequest();
             }
 
-            using var repository = new MQTTConfigRepository(new MQTTConfigContext());
+            using var repository = new MQTTConfigRepository(_context);
             var config = await repository.GetValueAsync(id);
 
             if (config == null)

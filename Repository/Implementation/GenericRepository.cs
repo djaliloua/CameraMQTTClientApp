@@ -6,6 +6,14 @@ namespace Repository.Implementation
 {
     public class GenericRepositoryViewModel<TSource, TDestination> : GenericRepository<TSource>, IRepositoryViewModel<TSource, TDestination> where TSource : class
     {
+        public GenericRepositoryViewModel(DbContext dbContext):base(dbContext)
+        {
+            
+        }
+        public GenericRepositoryViewModel()
+        {
+            
+        }
         public virtual async Task<IList<TDestination>> GetAllToViewModel()
         {
             return await _table.ProjectToType<TDestination>().ToListAsync();

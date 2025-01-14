@@ -1,6 +1,7 @@
 ﻿using DatabaseContexts;
 using KiotaOpenAIClient;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository;
 using Repository.Implementation;
@@ -9,11 +10,23 @@ namespace ViewModelLayer.DataAccessLayer
 {
     public abstract class ICameraRepo: GenericRepositoryViewModel<MQTTConfig, MQTTConfigViewModel>
     {
+        protected ICameraRepo(DbContext dbContext):base(dbContext)
+        {
+
+        }
+        protected ICameraRepo()
+        {
+            
+        }
 
     }
     public class CameraRepositoryApi : ICameraRepo
     {
         private readonly IApiService _apiService;
+        public CameraRepositoryApi(DbContext dbContext) : base(dbContext)
+        {
+            
+        }
         public CameraRepositoryApi()
         {
             _apiService = new ApiService();
@@ -42,10 +55,9 @@ namespace ViewModelLayer.DataAccessLayer
     }
     public class CameraRepository : ICameraRepo
     {
-        public CameraRepository()
+        public CameraRepository(DbContext dbContext) : base(dbContext)
         {
-            _dbContext = new MQTTConfigContext();
-            _table = _dbContext.Set<MQTTConfig>();
+            _table = dbContext.Set<MQTTConfig>();
             if (OperatingSystem.IsAndroid())
             {
                 _dbContext.Database.EnsureCreated();

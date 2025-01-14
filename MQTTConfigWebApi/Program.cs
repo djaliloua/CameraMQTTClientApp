@@ -1,3 +1,5 @@
+using DatabaseContexts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -8,28 +10,36 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.AddServiceDefaults();
+        //builder.WebHost.UseUrls("http://0.0.0.0:5000");
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        builder.Configuration
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{environment}.json", true, reloadOnChange: true)
+            .AddEnvironmentVariables();
 
-        //// Add services to the container.
-        ////builder.Services.AddTransient<IMQTTConfigRepository, MQTTConfigRepository>();
-        //builder.Services.AddAuthentication()
-        //    .AddJwtBearer(options =>
-        //    {
-        //        options.Authority = "https://localhost:5001";
-        //        options.TokenValidationParameters.ValidateAudience = false;
-        //        //options.Audience = "mqttconfigapi";
-        //    });
-        //builder.Services.AddAuthorization();
+        builder.AddServiceDefaults();
+        builder.Services.AddDbContext<MQTTConfigContext>(option =>
+        {
+            option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
+        });
+        builder.Logging.AddConsole();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("http://0.0.0.0:5000") // Replace with your client URL
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+        });
 
         builder
             .Services
             .AddControllers();
-            //.AddNewtonsoftJson(options =>
-            //{
-            //    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-            //}
-            //);
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
@@ -60,22 +70,6 @@ public class Program
                 BearerFormat = "JWT",
                 Scheme = "Bearer"
             });
-            //
-            //options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            //{
-            //    {
-            //        new OpenApiSecurityScheme
-            //        {
-            //            Reference = new OpenApiReference
-            //            {
-            //                Type = ReferenceType.SecurityScheme,
-            //                Id = "Bearer"
-            //            }
-            //        },
-            //        new string[] {}
-            //    }
-            //});
-
             // using System.Reflection;
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
@@ -91,20 +85,22 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI(option =>
             {
-                option.DocumentTitle = "Swagger Ali";
+                option.DocumentTitle = "MQTT Config Swagger";
             });
-            app.MapHealthChecks("/ishealth");
-            app.MapHealthChecks("/isalive", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
-            {
-                Predicate = r => r.Tags.Contains("live")
-            });
+            
         }
-
+        app.MapDefaultEndpoints();
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
-
+        if(!app.Environment.IsDevelopment())
+        {
+            ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
+            app.RunMigrations(logger);
+            
+        }
+        app.UseCors("AllowSpecificOrigin"); // Apply the CORS policy
+        app.MapGet("/", () => "Hello World!");
         app.MapControllers();
 
         app.Run();

@@ -1,13 +1,7 @@
-﻿using ApiCallServices;
-using Models;
-using System.Configuration;
+﻿using KiotaOpenAIClient;
 
-
-IApiService apiService = new ApiService(new HttpClient(), ConfigurationManager.AppSettings["ApiUrl"]);
-//var mqttConfig = await apiService.GetByIdAsync<MQTTConfig>(1);
-//Console.WriteLine(mqttConfig.HostName);
-//Console.WriteLine(mqttConfig.Password);
-var allConfigs = await apiService.GetAllAsync<List<MQTTConfig>>();
-Console.WriteLine(allConfigs.Count);
+IApiService apiService = new ApiService();
+var config = await apiService.GetMQTTConfigByGuidAsync(Guid.Parse("3FA85F64-5717-4562-B3FC-2C963F66AFA6"));
+Console.WriteLine(config.HostName);
 
 

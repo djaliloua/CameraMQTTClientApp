@@ -14,8 +14,8 @@ namespace DataAccessLayer.Implementation
         }
         public MQTTConfigRepository()
         {
-            _dbContext = new MQTTConfigContext();
-            _table = _dbContext.Set<MQTTConfig>();
+            //_dbContext = new MQTTConfigContext();
+            //_table = _dbContext.Set<MQTTConfig>();
             //_dbContext.Database.EnsureCreated();
         }
 
