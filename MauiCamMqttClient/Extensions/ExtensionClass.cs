@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using BaseViewModels;
+using Mapster;
 using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using Models;

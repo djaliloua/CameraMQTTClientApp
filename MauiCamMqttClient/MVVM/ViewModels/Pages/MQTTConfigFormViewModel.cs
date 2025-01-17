@@ -3,6 +3,8 @@ using ViewModelLayer;
 using KiotaOpenAIClient;
 using MauiCamMqttClient.Extensions;
 using KiotaOpenAIClient.Client.Models;
+using BaseViewModels.BaseModel;
+using BaseViewModels;
 
 namespace MauiCamMqttClient.MVVM.ViewModels.Pages
 {

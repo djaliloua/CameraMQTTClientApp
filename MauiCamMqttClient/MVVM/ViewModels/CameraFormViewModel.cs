@@ -1,5 +1,6 @@
-﻿using System.Windows.Input;
-using ViewModelLayer;
+﻿using BaseViewModels;
+using BaseViewModels.BaseModel;
+using System.Windows.Input;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {

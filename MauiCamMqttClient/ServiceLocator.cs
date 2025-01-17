@@ -1,4 +1,5 @@
-﻿using MauiCamMqttClient.MVVM.ViewModels;
+﻿using BaseViewModels;
+using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using MqttClientService;
 using ViewModelLayer;

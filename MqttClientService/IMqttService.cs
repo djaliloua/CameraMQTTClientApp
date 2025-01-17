@@ -1,4 +1,5 @@
-﻿using MQTTnet;
+﻿using BaseViewModels;
+using MQTTnet;
 using System.Buffers;
 using ViewModelLayer;
 
@@ -11,13 +12,13 @@ namespace MqttClientService
         public string HostName { get; set; }
         public int Port { get; set; }
         public string Message { get; set; }
-        public CredentialViewModel Credential { get; set; }
+        public MQTTCredentialViewModel Credential { get; set; }
         public MqttData(MQTTConfigViewModel cm)
         {
             S_TopicName = cm.BaseTopicName;
             HostName = cm.HostName;
             Port = int.Parse(cm.Port);
-            Credential = new CredentialViewModel(cm.UserName, cm.Password);
+            Credential = new MQTTCredentialViewModel(cm.UserName, cm.Password);
         }
         public MqttData()
         {

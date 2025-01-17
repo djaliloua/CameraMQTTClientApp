@@ -50,7 +50,7 @@ namespace Repository.Implementation
             _table = _dbContext.Set<T>();
             if (OperatingSystem.IsAndroid())
             {
-                _dbContext.Database.EnsureCreated();
+                _dbContext.Database.Migrate();
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using MauiCamMqttClient.MVVM.Views;
+﻿using BaseViewModels;
+using BaseViewModels.BaseModel;
+using MauiCamMqttClient.MVVM.Views;
 using System.Windows.Input;
 using ViewModelLayer;
 

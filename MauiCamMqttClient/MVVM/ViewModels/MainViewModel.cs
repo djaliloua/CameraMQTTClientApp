@@ -1,4 +1,6 @@
-﻿using MauiCamMqttClient.MVVM.Views;
+﻿using BaseViewModels;
+using BaseViewModels.BaseModel;
+using MauiCamMqttClient.MVVM.Views;
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
 using MqttClientService;
 using System.Diagnostics;

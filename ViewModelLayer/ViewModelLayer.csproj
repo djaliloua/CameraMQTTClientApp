@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KiotaOpenAIClient\KiotaOpenAIClient.csproj" />
-    <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\BaseViewModels\BaseViewModels.csproj" />
+    <ProjectReference Include="..\RepositoryEntityVMWrapper\RepositoryEntityVMWrapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>

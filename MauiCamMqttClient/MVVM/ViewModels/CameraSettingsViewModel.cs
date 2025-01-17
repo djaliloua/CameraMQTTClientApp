@@ -1,5 +1,5 @@
-﻿using MqttClientService;
-using ViewModelLayer;
+﻿using BaseViewModels.BaseModel;
+using MqttClientService;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {
