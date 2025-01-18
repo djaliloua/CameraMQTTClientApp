@@ -64,7 +64,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
                 ServiceLocator.CameraSettingsViewModel.IsFlash = false;
                 await _mqttService.DisconnectAsync();
                 IsStreaming = false;
-                await Shell.Current.DisplayAlert("Disconnected", "Stopped the stream!", "OK");
+                //await Shell.Current.DisplayAlert("Disconnected", "Stopped the stream!", "OK");
             }
             catch (Exception ex)
             {

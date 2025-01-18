@@ -1,12 +1,12 @@
 ﻿using BaseViewModels;
 using MQTTnet;
 using System.Buffers;
-using ViewModelLayer;
 
 namespace MqttClientService
 {
     public class MqttData
     {
+        public string ClientName { get; set; }
         public string P_TopicName { get; set; }
         public string S_TopicName { get; set; }
         public string HostName { get; set; }
@@ -15,6 +15,7 @@ namespace MqttClientService
         public MQTTCredentialViewModel Credential { get; set; }
         public MqttData(MQTTConfigViewModel cm)
         {
+            ClientName = cm.Name;
             S_TopicName = cm.BaseTopicName;
             HostName = cm.HostName;
             Port = int.Parse(cm.Port);
@@ -51,7 +52,7 @@ namespace MqttClientService
             {
                 options = new MqttClientOptionsBuilder()
                     .WithTcpServer(vm.HostName, vm.Port)
-                    .WithClientId("djalilou")
+                    //.WithClientId(vm.ClientName)
                     .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
                     .Build();
             }

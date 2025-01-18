@@ -52,10 +52,10 @@
                      Order="Secondary" />
     </ContentPage.ToolbarItems>
     <ScrollView VerticalScrollBarVisibility="Never">
-        <Grid Margin="20">
+        <Grid RowSpacing="20" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition />
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Picker x:Name="picker"
