@@ -23,6 +23,22 @@
                         WidthRequest="44" />
             </Grid>
         </the49:BottomSheet>
+        <Style TargetType="ImageButton">
+            <Style.Triggers>
+                <DataTrigger TargetType="ImageButton"
+                             Binding="{Binding IsStreaming}"
+                             Value="True">
+                    <Setter Property="Source"
+                            Value="stop.png" />
+                </DataTrigger>
+                <DataTrigger TargetType="ImageButton"
+                             Binding="{Binding IsStreaming}"
+                             Value="False">
+                    <Setter Property="Source"
+                            Value="play.png" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New"
@@ -43,6 +59,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Picker x:Name="picker"
+                    HorizontalTextAlignment="Center"
                     ItemsSource="{Binding CameraComboBoxItemViewModel.Items.Items}"
                     SelectedItem="{Binding CameraComboBoxItemViewModel.Items.SelectedItem}" />
             <GraphicsView x:Name="VideoCanvas"
@@ -62,18 +79,16 @@
                          HorizontalOptions="Center"
                          Spacing="20"
                          VerticalOptions="Center">
-                <Button Text="Start Stream"
-                        Command="{Binding StartStreamCommand}" />
-                <Button Text="Stop Stream"
-                        Command="{Binding StopStreamCommand}"/>
-                <!--<HorizontalStackLayout>
-                    <Switch IsToggled="{Binding IsFlash}"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-                    <Label Text="Flash"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </HorizontalStackLayout>-->
+                <ImageButton 
+                             WidthRequest="64"
+                             HeightRequest="64"
+                             Command="{Binding StartStreamCommand}">
+                    
+                </ImageButton>
+
+                <!--<Button Text="Stop Stream"
+                        Command="{Binding StopStreamCommand}"/>-->
+                
             </StackLayout>
         </Grid>
     </ScrollView>

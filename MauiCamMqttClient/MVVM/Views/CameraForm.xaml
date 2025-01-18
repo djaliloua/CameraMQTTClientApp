@@ -63,6 +63,7 @@
         <Entry Text="{Binding UserName}"
                Grid.Column="1"
                VerticalOptions="Center"
+               IsPassword="True"
                Grid.Row="4" />
         <Label Text="Password"
                Grid.Row="5"
@@ -70,6 +71,7 @@
                VerticalOptions="Center" />
         <Entry Text="{Binding Password}"
                Grid.Column="1"
+               IsPassword="True"
                VerticalOptions="Center"
                Grid.Row="5" />
         <Label Text="CameraId"
@@ -88,34 +90,36 @@
                    VerticalOptions="Center" />
         </HorizontalStackLayout>
 
-        <Button Grid.Row="8"
+        <ImageButton Grid.Row="8"
                 x:Name="btn"
                 Grid.ColumnSpan="2"
+                WidthRequest="64"
+                HeightRequest="64"
                 VerticalOptions="Center"
                 BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}">
-            <Button.Triggers>
-                <DataTrigger TargetType="Button"
+            <ImageButton.Triggers>
+                <DataTrigger TargetType="ImageButton"
                              Binding="{Binding Source={x:Reference contentPage}, Path=BindingContext.IsSave}"
                              Value="true">
                     <Setter Property="IsVisible"
                             Value="Visible" />
-                    <Setter Property="Text"
-                            Value="Add" />
+                    <Setter Property="Source"
+                            Value="save.png" />
                     <Setter Property="Command"
                             Value="{Binding AddCommand}" />
                 </DataTrigger>
-                <DataTrigger TargetType="Button"
+                <DataTrigger TargetType="ImageButton"
                              Binding="{Binding Source={x:Reference contentPage}, Path=BindingContext.IsSave}"
                              Value="false">
                     <Setter Property="IsVisible"
                             Value="Visible" />
-                    <Setter Property="Text"
-                            Value="Update" />
+                    <Setter Property="Source"
+                            Value="loop.png" />
                     <Setter Property="Command"
                             Value="{Binding UpdateCommand}" />
                 </DataTrigger>
-            </Button.Triggers>
-        </Button>
+            </ImageButton.Triggers>
+        </ImageButton>
 
     </Grid>
 </ContentPage>

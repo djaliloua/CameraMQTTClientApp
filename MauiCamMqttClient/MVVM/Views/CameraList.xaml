@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiCamMqttClient.MVVM.Views.CameraList"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:converter="clr-namespace:MauiCamMqttClient.Converters"
              xmlns:local="clr-namespace:MauiCamMqttClient"
              BindingContext="{x:Static local:ServiceLocator.CameraListViewModel}"
@@ -21,16 +22,24 @@
                     <ViewCell>
                         <SwipeView>
                             <SwipeView.RightItems>
-                                <SwipeItem Text="Update"
+                                <SwipeItem
                                            CommandParameter="{Binding Source={x:Reference grid}, Path=BindingContext}"
                                            BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}"
-                                           Command="{Binding UpdateCommand}" />
+                                           Command="{Binding UpdateCommand}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource Glyph="{mi:Material Icon=Edit, IconColor=Black}"/>
+                                    </SwipeItem.IconImageSource>
+
+                                </SwipeItem>
                             </SwipeView.RightItems>
                             <SwipeView.LeftItems>
-                                <SwipeItem Text="Delete"
-                                           CommandParameter="{Binding Source={x:Reference grid}, Path=BindingContext}"
+                                <SwipeItem CommandParameter="{Binding Source={x:Reference grid}, Path=BindingContext}"
                                            BindingContext="{Binding Source={x:Reference contentPage}, Path=BindingContext}"
-                                           Command="{Binding DeleteCommand}" />
+                                           Command="{Binding DeleteCommand}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource Glyph="{mi:Material Icon=Delete, IconColor=Black}" />
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
                             </SwipeView.LeftItems>
                             <Frame CornerRadius="0"
                                    HasShadow="True"

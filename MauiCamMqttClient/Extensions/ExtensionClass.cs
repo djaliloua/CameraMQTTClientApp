@@ -2,6 +2,7 @@
 using Mapster;
 using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
+using MauiIcons.Material;
 using Models;
 using MqttClientService;
 using Patterns.Abstractions;
@@ -32,12 +33,10 @@ namespace MauiCamMqttClient.Extensions
         }
         public static MauiAppBuilder ContextExtension(this MauiAppBuilder mauiAppBuilder)
         {
-            //mauiAppBuilder.Services.AddDbContext<RepositoryContext>(optionsAction =>
-            //{
-            //    optionsAction.UseSqlite("Data Source=configuration.db3");
-            //    optionsAction.UseLazyLoadingProxies();
-            //    optionsAction.ConfigureWarnings(warn => warn.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
-            //});
+            // Maui App Builder that Comes with Default Maui App
+            mauiAppBuilder.UseMauiApp<App>()
+                // Initialises the .Net Maui Icons - Material
+                .UseMaterialMauiIcons();
             return mauiAppBuilder;
         }
         public static MauiAppBuilder ViewModelsExtension(this MauiAppBuilder mauiAppBuilder)
@@ -62,8 +61,6 @@ namespace MauiCamMqttClient.Extensions
         public static MauiAppBuilder LoadBIExtension(this MauiAppBuilder mauiAppBuilder)
         {
             mauiAppBuilder.Services.AddScoped<ILoadService<MQTTConfigViewModel>, LoadCameraService>();
-
-
             return mauiAppBuilder;
         }
     }
