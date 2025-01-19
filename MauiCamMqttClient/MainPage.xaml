@@ -7,22 +7,6 @@
              x:Class="MauiCamMqttClient.MainPage"
              x:Name="this">
     <ContentPage.Resources>
-        <the49:BottomSheet x:Key="sheet"
-                           x:Name="sheet"
-                           BindingContext="{x:Reference this}"
-                           IsCancelable="False"
-                           Padding="8">
-            <Grid ColumnDefinitions="*, Auto">
-                <Editor x:Name="editor"
-                        AutoSize="TextChanges" />
-                <Button Text="ggggg"
-                        
-                        Grid.Column="1"
-                        CornerRadius="22"
-                        HeightRequest="44"
-                        WidthRequest="44" />
-            </Grid>
-        </the49:BottomSheet>
         <Style TargetType="ImageButton">
             <Style.Triggers>
                 <DataTrigger TargetType="ImageButton"
@@ -52,13 +36,15 @@
                      Order="Secondary" />
     </ContentPage.ToolbarItems>
     <ScrollView VerticalScrollBarVisibility="Never">
-        <Grid RowSpacing="20" Margin="10">
+        <Grid RowSpacing="20"
+              Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Picker x:Name="picker"
+                    IsVisible="{Binding IsLandScape}"
                     HorizontalTextAlignment="Center"
                     ItemsSource="{Binding CameraComboBoxItemViewModel.Items.Items}"
                     SelectedItem="{Binding CameraComboBoxItemViewModel.Items.SelectedItem}" />
@@ -68,29 +54,21 @@
                           HeightRequest="250"
                           WidthRequest="350">
                 <GraphicsView.GestureRecognizers>
-                    <PinchGestureRecognizer PinchUpdated="OnPinchUpdated"/>
+                    <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
                     <TapGestureRecognizer Command="{Binding ShowCamSettingCommand}"
                                           NumberOfTapsRequired="2" />
                 </GraphicsView.GestureRecognizers>
             </GraphicsView>
-            <StackLayout Padding="20"
+            <ImageButton WidthRequest="64"
+                         HeightRequest="64"
                          Grid.Row="2"
-                         Orientation="Horizontal"
+                         IsVisible="{Binding IsLandScape}"
                          HorizontalOptions="Center"
-                         Spacing="20"
-                         VerticalOptions="Center">
-                <ImageButton 
-                             WidthRequest="64"
-                             HeightRequest="64"
-                             Command="{Binding StartStreamCommand}">
-                    
-                </ImageButton>
+                         VerticalOptions="Center"
+                         Command="{Binding StartStreamCommand}">
 
-                <!--<Button Text="Stop Stream"
-                        Command="{Binding StopStreamCommand}"/>-->
-                
-            </StackLayout>
+            </ImageButton>
+
         </Grid>
     </ScrollView>
-    
 </ContentPage>

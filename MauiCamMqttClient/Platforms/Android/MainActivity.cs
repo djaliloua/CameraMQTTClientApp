@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.OS;
+using CommunityToolkit.Mvvm.Messaging;
 using Plugin.Fingerprint;
 
 namespace MauiCamMqttClient
@@ -12,6 +14,26 @@ namespace MauiCamMqttClient
         {
             base.OnCreate(savedInstanceState);
             CrossFingerprint.SetCurrentActivityResolver(() => this);
+        }
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            // Check the orientation
+            switch (newConfig.Orientation)
+            {
+                case Orientation.Portrait:
+                    // Logic for portrait mode
+                    Console.WriteLine("Device rotated to Portrait mode.");
+                    //WeakReferenceMessenger.Default.Send("portrait", "orientation");
+                    ServiceLocator.MainViewModel.IsLandScape = true;
+                    break;
+                case Orientation.Landscape:
+                    // Logic for landscape mode
+                    Console.WriteLine("Device rotated to Landscape mode.");
+                    //WeakReferenceMessenger.Default.Send("landscape", "orientation");
+                    ServiceLocator.MainViewModel.IsLandScape = false;
+                    break;
+            }
         }
     }
 }

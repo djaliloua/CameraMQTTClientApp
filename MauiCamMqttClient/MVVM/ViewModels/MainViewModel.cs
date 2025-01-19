@@ -1,5 +1,6 @@
 ﻿using BaseViewModels;
 using BaseViewModels.BaseModel;
+using CommunityToolkit.Mvvm.Messaging;
 using MauiCamMqttClient.MVVM.Views;
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
 using MqttClientService;
@@ -22,6 +23,12 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             get => field;
             set => UpdateObservable(ref field, value);
         }
+        public bool IsLandScape
+        {
+            get => field;
+            set => UpdateObservable(ref field, value);
+        }
+       
 
         #region Commands
         public ICommand NewCommand { get; private set; }
@@ -34,6 +41,20 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         #region Constructor
         public MainViewModel(IMqttService mqttService)
         {
+#if ANDROID
+            WeakReferenceMessenger.Default.Register<string>("orientation", (sender, msg) =>
+            {
+                if (sender.ToString() == "landscape")
+                {
+                    IsLandScape = false;
+                }
+                else
+                {
+                    IsLandScape = true;
+                }   
+            });
+            IsLandScape = true;
+#endif
             CameraComboBoxItemViewModel = ServiceLocator.CameraComboBoxItemViewModel;
             _mqttService = mqttService;
             NewCommand = new Command(OnNew);
@@ -42,7 +63,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             //StopStreamCommand = new Command(OnStopStream);
             ShowCamSettingCommand = new Command(OnShowCamSetting);
         }
-        #endregion
+#endregion
 
         private async void OnShowCamSetting(object parameter)
         {
