@@ -1,6 +1,6 @@
 ﻿using BaseViewModels;
-using KiotaOpenAIClient.Client.Models;
 using Microsoft.EntityFrameworkCore;
+using OpenAIClient;
 using Repository.Implementation;
 
 namespace RepositoryEntityVMWrapper.Abstractions

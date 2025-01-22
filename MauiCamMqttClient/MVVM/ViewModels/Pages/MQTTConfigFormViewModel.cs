@@ -1,8 +1,5 @@
 ﻿using System.Windows.Input;
-using ViewModelLayer;
-using KiotaOpenAIClient;
 using MauiCamMqttClient.Extensions;
-using KiotaOpenAIClient.Client.Models;
 using BaseViewModels.BaseModel;
 using BaseViewModels;
 
@@ -18,15 +15,15 @@ namespace MauiCamMqttClient.MVVM.ViewModels.Pages
         public ICommand SaveCommand { get; private set; }
         public MQTTConfigFormViewModel()
         {
-            Init();
+            //Init();
             SaveCommand = new Command(OnSave);
         }
-        private async void Init()
-        {
-            IApiService apiService = new ApiService();
-            var config = await apiService.GetMQTTConfigByGuidAsync(Guid.Parse("3FA85F64-5717-4562-B3FC-2C963F66AFA6"));
-            MQTTConfig = config.ToViewModel<MQTTConfig, MQTTConfigViewModel>() ?? new MQTTConfigViewModel();
-        }
+        //private async void Init()
+        //{
+        //    IApiService apiService = new ApiService();
+        //    var config = await apiService.GetMQTTConfigByGuidAsync(Guid.Parse("3FA85F64-5717-4562-B3FC-2C963F66AFA6"));
+        //    MQTTConfig = config.ToViewModel<MQTTConfig, MQTTConfigViewModel>() ?? new MQTTConfigViewModel();
+        //}
 
         private void OnSave(object parameter)
         {

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaseViewModels\BaseViewModels.csproj" />
-    <ProjectReference Include="..\KiotaOpenAIClient\KiotaOpenAIClient.csproj" />
+    <ProjectReference Include="..\OpenAIClient\OpenAIClient.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
