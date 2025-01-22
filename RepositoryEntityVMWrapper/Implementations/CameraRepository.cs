@@ -8,7 +8,7 @@ using RepositoryEntityVMWrapper.Abstractions;
 
 namespace RepositoryEntityVMWrapper.Implementations
 {
-    public class CameraRepositoryApi : ICameraRepo
+    public class CameraRepositoryApi : ICameraRepoApi
     {
         private readonly IApiService _apiService;
         public CameraRepositoryApi(DbContext dbContext) : base(dbContext)
@@ -45,11 +45,8 @@ namespace RepositoryEntityVMWrapper.Implementations
     {
         public CameraRepository(DbContext dbContext) : base(dbContext)
         {
-            _table = dbContext.Set<MQTTConfig>();
-            if (OperatingSystem.IsAndroid())
-            {
-                _dbContext.Database.EnsureCreated();
-            }
+            _table = dbContext.Set<Models.MQTTConfig>();
+            dbContext.Database.Migrate();
         }
     }
 }

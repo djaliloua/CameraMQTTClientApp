@@ -80,6 +80,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\DatabaseContexts\DatabaseContexts.csproj" />
 	  <ProjectReference Include="..\KiotaOpenAIClient\KiotaOpenAIClient.csproj" />
 	  <ProjectReference Include="..\MqttClientService\MqttClientService.csproj" />
 	  <ProjectReference Include="..\ViewModelLayer\ViewModelLayer.csproj" />

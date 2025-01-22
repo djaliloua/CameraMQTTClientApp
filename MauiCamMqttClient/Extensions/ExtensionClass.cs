@@ -1,8 +1,10 @@
 ﻿using BaseViewModels;
+using DatabaseContexts;
 using Mapster;
 using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using MauiIcons.Material;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using MqttClientService;
 using Patterns.Abstractions;
@@ -28,6 +30,7 @@ namespace MauiCamMqttClient.Extensions
         public static MauiAppBuilder RepositoryExtension(this MauiAppBuilder mauiAppBuilder)
         {
             //mauiAppBuilder.Services.AddTransient<ICameraRepository, CameraRepository>();
+            mauiAppBuilder.Services.AddTransient<MQTTConfigContext>();
 
             return mauiAppBuilder;
         }

@@ -19,22 +19,23 @@ public class Program
             .AddEnvironmentVariables();
 
         builder.AddServiceDefaults();
-        builder.Services.AddDbContext<MQTTConfigContext>(option =>
-        {
-            option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
-        });
+        builder.Services.AddTransient<MQTTConfigContext>();
+        //builder.Services.AddDbContext<MQTTConfigContext>(option =>
+        //{
+        //    option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
+        //});
         builder.Logging.AddConsole();
 
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy("AllowSpecificOrigin",
-                builder =>
-                {
-                    builder.WithOrigins("http://0.0.0.0:5000") // Replace with your client URL
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
-                });
-        });
+        //builder.Services.AddCors(options =>
+        //{
+        //    options.AddPolicy("AllowSpecificOrigin",
+        //        builder =>
+        //        {
+        //            builder.WithOrigins("http://0.0.0.0:5000") // Replace with your client URL
+        //                   .AllowAnyHeader()
+        //                   .AllowAnyMethod();
+        //        });
+        //});
 
         builder
             .Services
@@ -77,7 +78,6 @@ public class Program
 
         var app = builder.Build();
 
-        app.MapDefaultEndpoints();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -93,13 +93,9 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-        if(!app.Environment.IsDevelopment())
-        {
-            ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
-            app.RunMigrations(logger);
-            
-        }
-        app.UseCors("AllowSpecificOrigin"); // Apply the CORS policy
+        ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
+        app.RunMigrations(logger);
+        //app.UseCors("AllowSpecificOrigin"); // Apply the CORS policy
         app.MapGet("/", () => "Hello World!");
         app.MapControllers();
 

@@ -5,3 +5,6 @@ Accept: application/json
 
 ###
 GET {{MQTTConfigWebApi_HostAddress}}/MqttConfig/1
+
+###
+POST {{MQTTConfigWebApi_HostAddress}}/MqttConfig/

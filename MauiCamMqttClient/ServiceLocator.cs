@@ -1,4 +1,5 @@
 ﻿using BaseViewModels;
+using DatabaseContexts;
 using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using MqttClientService;
@@ -8,6 +9,7 @@ namespace MauiCamMqttClient
 {
     public static class ServiceLocator
     {
+        public static MQTTConfigContext MQTTConfigContext => GetService<MQTTConfigContext>();
         public static MQTTConfigFormViewModel MQTTConfigFormViewModel => GetService<MQTTConfigFormViewModel>();
         public static CollectionViewModel CollectionViewModel => GetService<CollectionViewModel>();
         public static IMqttService MqttService => GetService<IMqttService>();

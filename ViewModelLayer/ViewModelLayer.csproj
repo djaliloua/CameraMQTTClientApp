@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaseViewModels\BaseViewModels.csproj" />
+    <ProjectReference Include="..\DatabaseContexts\DatabaseContexts.csproj" />
     <ProjectReference Include="..\RepositoryEntityVMWrapper\RepositoryEntityVMWrapper.csproj" />
   </ItemGroup>
 

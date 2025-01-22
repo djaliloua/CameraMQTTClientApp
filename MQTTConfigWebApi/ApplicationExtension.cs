@@ -7,9 +7,7 @@ namespace MQTTConfigWebApi
     {
         public static WebApplication RunMigrations(this WebApplication app, ILogger<Program> logger)
         {
-            using var scope = app.Services.CreateScope();
-            var services = scope.ServiceProvider;
-            var context = services.GetRequiredService<MQTTConfigContext>();
+            var context = new MQTTConfigContext();
             logger.LogInformation("abdou djalilou ali");
             logger.LogInformation(context.Database.GetConnectionString());
             context.Database.Migrate();

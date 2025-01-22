@@ -14,7 +14,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         public CameraListViewModel()
         {
             ListOfCamera = ServiceLocator.CollectionViewModel;
-            UpdateCommand = new Command(OnUpdate);
+            UpdateCommand = new Command(OnEdit);
             DeleteCommand = new Command(OnDelete);
         }
 
@@ -24,11 +24,12 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             bool result = await Shell.Current.DisplayAlert("Info", $"Do you want to delete {cameraViewModel.Name}", "Yes", "No");
             if (result)
             {
-                ListOfCamera.Delete(cameraViewModel);
+                ListOfCamera.Delete(cameraViewModel, ServiceLocator.MQTTConfigContext);
+                //ListOfCamera.Delete(cameraViewModel);
             }
         }
 
-        private async void OnUpdate(object parameter)
+        private async void OnEdit(object parameter)
         {
             MQTTConfigViewModel viewModel = parameter as MQTTConfigViewModel;
             Dictionary<string, object> parameters = new Dictionary<string, object>()
