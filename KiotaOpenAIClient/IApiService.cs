@@ -12,7 +12,7 @@ namespace KiotaOpenAIClient
         public ApiService()
         {
             var authProvider = new AnonymousAuthenticationProvider();
-            _adapter = new HttpClientRequestAdapter(authProvider) { BaseUrl = "http://192.168.1.131:5000"};
+            _adapter = new HttpClientRequestAdapter(authProvider) { BaseUrl = "https://192.168.1.131:5001"};
             _client = new MQTTConfigClient(_adapter);
         }
         public ApiService(string baseUrl)
