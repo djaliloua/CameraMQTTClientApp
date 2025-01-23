@@ -8,3 +8,7 @@ GET {{MQTTConfigWebApi_HostAddress}}/MqttConfig/1
 
 ###
 POST {{MQTTConfigWebApi_HostAddress}}/MqttConfig/
+
+###
+
+GET {{MQTTConfigWebApi_HostAddress}}/MqttConfig/app/555c8a05-b385-4426-a96e-35dbcbef9791
