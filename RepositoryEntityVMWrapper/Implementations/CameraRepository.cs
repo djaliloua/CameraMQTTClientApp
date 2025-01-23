@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenAIClient;
 using Repository;
 using RepositoryEntityVMWrapper.Abstractions;
-using System.Collections.Generic;
+using Models;
 using System.Net.Security;
 
 namespace RepositoryEntityVMWrapper.Implementations
@@ -46,7 +46,7 @@ namespace RepositoryEntityVMWrapper.Implementations
         }
         public override async Task<MQTTConfig> UpdateAsync(MQTTConfigViewModel entity)
         {
-            var obj = entity.FromVM<MQTTConfigViewModel, MQTTConfig>();
+            var obj = entity.Adapt<MQTTConfig>();
             var config = await _apiService.MqttConfigPUTAsync(entity.Id, obj);
             return config.Adapt<MQTTConfig>();
         }

@@ -20,6 +20,7 @@
 
 namespace OpenAIClient
 {
+    using Models;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -810,62 +811,62 @@ namespace OpenAIClient
         }
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MQTTConfig
-    {
-        [Newtonsoft.Json.JsonConstructor]
+    //[System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    //public partial class MQTTConfig
+    //{
+    //    [Newtonsoft.Json.JsonConstructor]
 
-        public MQTTConfig(string @baseTopicName, System.Guid @cameraId, string @hostName, int @id, bool @isActive, string @name, string @password, string @port, string @userName)
+    //    public MQTTConfig(string @baseTopicName, System.Guid @cameraId, string @hostName, int @id, bool @isActive, string @name, string @password, string @port, string @userName)
 
-        {
+    //    {
 
-            this.Id = @id;
+    //        this.Id = @id;
 
-            this.CameraId = @cameraId;
+    //        this.CameraId = @cameraId;
 
-            this.Name = @name;
+    //        this.Name = @name;
 
-            this.HostName = @hostName;
+    //        this.HostName = @hostName;
 
-            this.Port = @port;
+    //        this.Port = @port;
 
-            this.UserName = @userName;
+    //        this.UserName = @userName;
 
-            this.Password = @password;
+    //        this.Password = @password;
 
-            this.BaseTopicName = @baseTopicName;
+    //        this.BaseTopicName = @baseTopicName;
 
-            this.IsActive = @isActive;
+    //        this.IsActive = @isActive;
 
-        }
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Id { get; }
+    //    }
+    //    [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public int Id { get; }
 
-        [Newtonsoft.Json.JsonProperty("cameraId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid CameraId { get; }
+    //    [Newtonsoft.Json.JsonProperty("cameraId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public System.Guid CameraId { get; }
 
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; }
+    //    [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string Name { get; }
 
-        [Newtonsoft.Json.JsonProperty("hostName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HostName { get; }
+    //    [Newtonsoft.Json.JsonProperty("hostName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string HostName { get; }
 
-        [Newtonsoft.Json.JsonProperty("port", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Port { get; }
+    //    [Newtonsoft.Json.JsonProperty("port", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string Port { get; }
 
-        [Newtonsoft.Json.JsonProperty("userName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string UserName { get; }
+    //    [Newtonsoft.Json.JsonProperty("userName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string UserName { get; }
 
-        [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Password { get; }
+    //    [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string Password { get; }
 
-        [Newtonsoft.Json.JsonProperty("baseTopicName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BaseTopicName { get; }
+    //    [Newtonsoft.Json.JsonProperty("baseTopicName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public string BaseTopicName { get; }
 
-        [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IsActive { get; }
+    //    [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    //    public bool IsActive { get; }
 
-    }
+    //}
 
 
 

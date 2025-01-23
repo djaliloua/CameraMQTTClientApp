@@ -1,6 +1,6 @@
 ﻿using BaseViewModels;
 using Microsoft.EntityFrameworkCore;
-using OpenAIClient;
+using Models;
 using Repository.Implementation;
 
 namespace RepositoryEntityVMWrapper.Abstractions

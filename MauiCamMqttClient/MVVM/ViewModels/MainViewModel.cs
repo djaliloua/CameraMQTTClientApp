@@ -55,6 +55,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             });
             IsLandScape = true;
 #endif
+            IsLandScape = true;
             CameraComboBoxItemViewModel = ServiceLocator.CameraComboBoxItemViewModel;
             _mqttService = mqttService;
             NewCommand = new Command(OnNew);
