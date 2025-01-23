@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Implementation;
 
-namespace RepositoryEntityVMWrapper.Abstractions
+namespace RepositoryEntityVmAdpter.Abstractions
 {
     public abstract class ICameraRepoApi : GenericRepositoryViewModel<MQTTConfig, MQTTConfigViewModel>
     {

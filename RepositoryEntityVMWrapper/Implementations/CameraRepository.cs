@@ -3,11 +3,11 @@ using Mapster;
 using Microsoft.EntityFrameworkCore;
 using OpenAIClient;
 using Repository;
-using RepositoryEntityVMWrapper.Abstractions;
+using RepositoryEntityVmAdpter.Abstractions;
 using Models;
 using System.Net.Security;
 
-namespace RepositoryEntityVMWrapper.Implementations
+namespace RepositoryEntityVmAdpter.Implementations
 {
     public class CameraRepositoryApi : ICameraRepoApi
     {

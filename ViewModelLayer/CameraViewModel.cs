@@ -3,8 +3,8 @@ using DatabaseContexts;
 using Microsoft.EntityFrameworkCore;
 using Patterns.Abstractions;
 using Patterns.Implementations;
-using RepositoryEntityVMWrapper.Abstractions;
-using RepositoryEntityVMWrapper.Implementations;
+using RepositoryEntityVmAdpter.Abstractions;
+using RepositoryEntityVmAdpter.Implementations;
 
 namespace ViewModelLayer
 {
