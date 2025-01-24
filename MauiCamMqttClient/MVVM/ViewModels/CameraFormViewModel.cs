@@ -8,7 +8,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         public CameraViewModel CameraFrm
         {
             get => field;
-            set => UpdateObservable(ref field, value);
+            set => UpdateObservable(ref field,  value);
         }
        
         public bool IsSave
