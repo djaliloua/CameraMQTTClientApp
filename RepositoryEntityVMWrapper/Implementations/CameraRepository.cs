@@ -66,7 +66,7 @@ namespace RepositoryEntityVmAdpter.Implementations
         public CameraRepository(DbContext dbContext) : base(dbContext)
         {
             _table = dbContext.Set<Models.MQTTConfig>();
-            dbContext.Database.Migrate();
+            //dbContext.Database.Migrate();
         }
     }
 }
