@@ -19,8 +19,13 @@ namespace ViewModelLayer
     {
         public CollectionViewModel(MQTTConfigContext context, ILoadService<MQTTConfigViewModel> loadService) : base(loadService)
         {
-            //Init(context);
+#if DEBUG
+            Init(context);
+#else
             Init();
+#endif
+
+            //
         }
         protected override int Index(MQTTConfigViewModel item)
         {

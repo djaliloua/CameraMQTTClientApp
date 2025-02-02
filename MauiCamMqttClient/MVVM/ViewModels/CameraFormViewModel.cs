@@ -32,8 +32,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         {
             if (CameraFrm.Error == null)
             {
+                //
+
+#if DEBUG
+                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm, ServiceLocator.MQTTConfigContext);
+
+#else
                 await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
-                //await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm, ServiceLocator.MQTTConfigContext);
+#endif
                 await Shell.Current.GoToAsync("..");
             }
             else
@@ -47,8 +53,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             {
                 if (!CheckDuplicateName(CameraFrm.Name))
                 {
+#if DEBUG
+                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm, ServiceLocator.MQTTConfigContext);
+
+#else
                     await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
-                    //await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm, ServiceLocator.MQTTConfigContext);
+#endif
+                    
+
                     await Shell.Current.GoToAsync("..");
                 }
                 else
