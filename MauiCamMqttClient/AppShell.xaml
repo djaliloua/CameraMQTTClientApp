@@ -4,12 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiCamMqttClient"
-    Shell.FlyoutBehavior="Disabled"
-    Title="MauiCamMqttClient">
+    xmlns:Pages="clr-namespace:MauiCamMqttClient.Pages"
+       Shell.FlyoutWidth="300"
+       FlyoutHeaderBehavior="Fixed"
+       Shell.FlyoutBehavior="Flyout"
+       Title="MauiCamMqttClient">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"
+                      Title="Home" />
+        <ShellContent ContentTemplate="{DataTemplate Pages:MQTTConfigForm}"
+                      IsEnabled="False"
+                      Title="Settings" />
+    </FlyoutItem>
 
 </Shell>

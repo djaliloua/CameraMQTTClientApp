@@ -1,4 +1,6 @@
-﻿using MauiCamMqttClient.MVVM.Views;
+﻿using BaseViewModels;
+using BaseViewModels.BaseModel;
+using MauiCamMqttClient.MVVM.Views;
 using System.Windows.Input;
 using ViewModelLayer;
 
@@ -12,23 +14,27 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         public CameraListViewModel()
         {
             ListOfCamera = ServiceLocator.CollectionViewModel;
-            UpdateCommand = new Command(OnUpdate);
+            UpdateCommand = new Command(OnEdit);
             DeleteCommand = new Command(OnDelete);
         }
 
         private async void OnDelete(object parameter)
         {
-            CameraViewModel cameraViewModel = (CameraViewModel)parameter;
+            MQTTConfigViewModel cameraViewModel = (MQTTConfigViewModel)parameter;
             bool result = await Shell.Current.DisplayAlert("Info", $"Do you want to delete {cameraViewModel.Name}", "Yes", "No");
             if (result)
             {
+#if DEBUG
+                ListOfCamera.Delete(cameraViewModel, ServiceLocator.MQTTConfigContext);
+#else
                 ListOfCamera.Delete(cameraViewModel);
+#endif
             }
         }
 
-        private async void OnUpdate(object parameter)
+        private async void OnEdit(object parameter)
         {
-            CameraViewModel viewModel = parameter as CameraViewModel;
+            MQTTConfigViewModel viewModel = parameter as MQTTConfigViewModel;
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
                 {"IsSave", false },

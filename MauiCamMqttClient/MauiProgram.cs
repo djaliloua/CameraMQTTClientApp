@@ -38,9 +38,11 @@ namespace MauiCamMqttClient
                 FingerPrintAuthentification _authentification = new FingerPrintAuthentification();
                 _ = _authentification.Authenticate();
             }
-            
-            
-            return builder.Build();
+            MauiApp app = builder.Build();
+            app.RunSeedData();
+
+
+            return app;
         }
     }
 }

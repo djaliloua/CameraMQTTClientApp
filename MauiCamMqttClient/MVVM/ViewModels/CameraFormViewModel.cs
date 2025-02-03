@@ -1,11 +1,12 @@
-﻿using System.Windows.Input;
-using ViewModelLayer;
+﻿using BaseViewModels;
+using BaseViewModels.BaseModel;
+using System.Windows.Input;
 
 namespace MauiCamMqttClient.MVVM.ViewModels
 {
     public class CameraFormViewModel:BaseViewModel, IQueryAttributable
     {
-        public CameraViewModel CameraFrm
+        public MQTTConfigViewModel CameraFrm
         {
             get => field;
             set => UpdateObservable(ref field,  value);
@@ -31,7 +32,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         {
             if (CameraFrm.Error == null)
             {
-                ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
+                //
+
+#if DEBUG
+                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm, ServiceLocator.MQTTConfigContext);
+
+#else
+                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
+#endif
                 await Shell.Current.GoToAsync("..");
             }
             else
@@ -45,7 +53,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             {
                 if (!CheckDuplicateName(CameraFrm.Name))
                 {
-                    ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
+#if DEBUG
+                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm, ServiceLocator.MQTTConfigContext);
+
+#else
+                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
+#endif
+                    
+
                     await Shell.Current.GoToAsync("..");
                 }
                 else
@@ -62,7 +77,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         }
         private static bool CheckDuplicateName(string name)
         {
-            CameraViewModel viewModel = ServiceLocator.CameraComboBoxItemViewModel.Items.Items.FirstOrDefault(x => x.Name.Trim().ToLower() == name.Trim().ToLower());
+            MQTTConfigViewModel viewModel = ServiceLocator.CameraComboBoxItemViewModel.Items.Items.FirstOrDefault(x => x.Name.Trim().ToLower() == name.Trim().ToLower());
             return viewModel != null;
         }
 
@@ -71,7 +86,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             if(query.ContainsKey("IsSave"))
             {
                 IsSave = (bool)query["IsSave"];
-                CameraFrm = (CameraViewModel)query["CamVM"];
+                CameraFrm = (MQTTConfigViewModel)query["CamVM"];
             }
         }
     }

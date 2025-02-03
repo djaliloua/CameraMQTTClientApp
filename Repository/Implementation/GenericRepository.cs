@@ -1,5 +1,4 @@
-﻿using DatabaseContexts;
-using Mapster;
+﻿using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Repository.Interface;
 
@@ -7,23 +6,34 @@ namespace Repository.Implementation
 {
     public class GenericRepositoryViewModel<TSource, TDestination> : GenericRepository<TSource>, IRepositoryViewModel<TSource, TDestination> where TSource : class
     {
-        public virtual IList<TDestination> GetAllToViewModel()
+        public GenericRepositoryViewModel(DbContext dbContext):base(dbContext)
         {
-            return _table.ProjectToType<TDestination>().ToList();
+            
         }
-        public virtual void Update(TDestination entity)
+        public GenericRepositoryViewModel()
+        {
+            
+        }
+        public virtual async Task<IList<TDestination>> GetAllToViewModel()
+        {
+            return await _table.ProjectToType<TDestination>().ToListAsync();
+        }
+        public virtual async Task<TSource> UpdateAsync(TDestination entity)
         {
             TSource obj = entity.FromVM<TDestination, TSource>();
             _dbContext.Update(obj);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
+            return obj;
         }
-        public virtual TDestination Save(TDestination entity)
+        public virtual async Task<TDestination> SaveAsync(TDestination entity)
         {
             TSource obj = entity.FromVM<TDestination, TSource>();
             _table.Add(obj);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return obj.ToVM<TSource, TDestination>();
         }
+
+       
     }
     public class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : class
     {
@@ -32,11 +42,15 @@ namespace Repository.Implementation
         protected DbSet<T> _table;
         public GenericRepository()
         {
-            _dbContext = new RepositoryContext();
+            
+        }
+        public GenericRepository(DbContext dbContext)
+        {
+            _dbContext = dbContext;
             _table = _dbContext.Set<T>();
-            if(OperatingSystem.IsAndroid())
+            if (OperatingSystem.IsAndroid())
             {
-                _dbContext.Database.EnsureCreated();
+                _dbContext.Database.Migrate();
             }
         }
 

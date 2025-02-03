@@ -1,8 +1,8 @@
 ﻿namespace Repository.Interface
 {
-    public interface IRepositoryViewModel<TSource, TDestination> : IGenericRepository<TSource>
+    public interface IRepositoryViewModel<TSource, TDestination> : IGenericRepositoryAsync<TSource>
     {
-        IList<TDestination> GetAllToViewModel();
+        Task<IList<TDestination>> GetAllToViewModel();
     }
     public interface IGenericRepository<T> : IGenericRepositoryAsync<T>
     {

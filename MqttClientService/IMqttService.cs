@@ -1,23 +1,25 @@
-﻿using MQTTnet;
+﻿using BaseViewModels;
+using MQTTnet;
 using System.Buffers;
-using ViewModelLayer;
 
 namespace MqttClientService
 {
     public class MqttData
     {
+        public string ClientName { get; set; }
         public string P_TopicName { get; set; }
         public string S_TopicName { get; set; }
         public string HostName { get; set; }
         public int Port { get; set; }
         public string Message { get; set; }
-        public CredentialViewModel Credential { get; set; }
-        public MqttData(CameraViewModel cm)
+        public MQTTCredentialViewModel Credential { get; set; }
+        public MqttData(MQTTConfigViewModel cm)
         {
-            S_TopicName = cm.TopicName;
+            ClientName = cm.Name;
+            S_TopicName = cm.BaseTopicName;
             HostName = cm.HostName;
             Port = int.Parse(cm.Port);
-            Credential = cm.Credential;
+            Credential = new MQTTCredentialViewModel(cm.UserName, cm.Password);
         }
         public MqttData()
         {
@@ -50,6 +52,7 @@ namespace MqttClientService
             {
                 options = new MqttClientOptionsBuilder()
                     .WithTcpServer(vm.HostName, vm.Port)
+                    //.WithClientId(vm.ClientName)
                     .WithCredentials(vm.Credential.UserName, vm.Credential.Password)
                     .Build();
             }

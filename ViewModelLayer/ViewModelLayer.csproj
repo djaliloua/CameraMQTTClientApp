@@ -4,11 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-	  <LangVersion>preview</LangVersion>
+	 <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\BaseViewModels\BaseViewModels.csproj" />
+    <ProjectReference Include="..\DatabaseContexts\DatabaseContexts.csproj" />
+    <ProjectReference Include="..\RepositoryEntityVMWrapper\RepositoryEntityVmAdpter.csproj" />
   </ItemGroup>
 
   <ItemGroup>
