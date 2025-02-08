@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="MauiCamMqttClient.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MauiCamMqttClient"
-    xmlns:Pages="clr-namespace:MauiCamMqttClient.Pages"
+<Shell x:Class="MauiCamMqttClient.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MauiCamMqttClient"
+       xmlns:Pages="clr-namespace:MauiCamMqttClient.Pages"
+       xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
        Shell.FlyoutWidth="300"
        FlyoutHeaderBehavior="Fixed"
        Shell.FlyoutBehavior="Flyout"
@@ -16,10 +16,30 @@
         Route="MainPage" />-->
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}"
-                      Title="Home" />
-        <ShellContent ContentTemplate="{DataTemplate Pages:MQTTConfigForm}"
-                      IsEnabled="False"
-                      Title="Settings" />
+                      Title="Home">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialRegular"
+                                 Glyph="{x:Static m:MaterialRound.Home}"
+                                 Color="DarkBlue" />
+            </ShellContent.Icon>
+        </ShellContent>
+
     </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate Pages:QRCode}"
+                  Title="QR">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="MaterialRegular"
+                             Glyph="{x:Static m:MaterialRound.Qr_code}"
+                             Color="DarkBlue" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent ContentTemplate="{DataTemplate Pages:MQTTConfigForm}"
+                  Title="Settings">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="MaterialRegular"
+                             Glyph="{x:Static m:MaterialRound.Settings}"
+                             Color="DarkBlue" />
+        </ShellContent.Icon>
+    </ShellContent>
 
 </Shell>

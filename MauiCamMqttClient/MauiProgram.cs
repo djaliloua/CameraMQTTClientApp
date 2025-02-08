@@ -4,6 +4,8 @@ using Plugin.Fingerprint.Abstractions;
 using Plugin.Fingerprint;
 using System.Diagnostics;
 using The49.Maui.BottomSheet;
+using Camera.MAUI;
+using UraniumUI;
 
 namespace MauiCamMqttClient
 {
@@ -21,10 +23,19 @@ namespace MauiCamMqttClient
                 .ContextExtension()
                 .RepositoryExtension()
                 .UseBottomSheet()
+                .UseMauiCameraView()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
+                //.UseCameraScanner()
+                .ConfigureMauiHandlers(handlers =>
+                {
+                    //handlers.AddHandler(typeof(CameraBarcodeReaderView), typeof(CameraBarcodeReaderViewHandler));
+                })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddMaterialIconFonts();
                 });
              
 
