@@ -19,11 +19,12 @@ namespace ViewModelLayer
     {
         public CollectionViewModel(MQTTConfigContext context, ILoadService<MQTTConfigViewModel> loadService) : base(loadService)
         {
-#if DEBUG
-            Init(context);
-#else
             Init();
-#endif
+            //#if DEBUG
+            //            Init(context);
+            //#else
+            //            Init();
+            //#endif
 
             //
         }
@@ -32,9 +33,9 @@ namespace ViewModelLayer
             MQTTConfigViewModel cameraViewModel = Items.FirstOrDefault(x => x.Id == item.Id);
             return base.Index(cameraViewModel);
         }
-        public bool Delete(MQTTConfigViewModel camera)
+        public async Task<bool> Delete(MQTTConfigViewModel camera)
         {
-            using ICameraRepoApi _repository = new CameraRepositoryApi();
+            using ICameraRepoApi _repository = await CameraRepositoryApi.CreateAsync();
             _repository.Delete(camera.Id);
             DeleteItem(camera);
             return true;
@@ -48,7 +49,7 @@ namespace ViewModelLayer
         }
         public async Task<bool> Update(MQTTConfigViewModel camera)
         {
-            using ICameraRepoApi _repository = new CameraRepositoryApi();
+            using ICameraRepoApi _repository = await CameraRepositoryApi.CreateAsync();
             await _repository.UpdateAsync(camera);
             UpdateItem(camera);
             return true;
@@ -62,7 +63,7 @@ namespace ViewModelLayer
         }
         public async Task<bool> Add(MQTTConfigViewModel camera)
         {
-            using ICameraRepoApi _repository = new CameraRepositoryApi();
+            using ICameraRepoApi _repository = await CameraRepositoryApi.CreateAsync();
             MQTTConfigViewModel cameraViewModel = await _repository.SaveAsync(camera);
             AddItem(cameraViewModel);
             return true;
@@ -86,7 +87,7 @@ namespace ViewModelLayer
         }
         private async void Init()
         {
-            using ICameraRepoApi _repository = new CameraRepositoryApi();
+            using ICameraRepoApi _repository = await CameraRepositoryApi.CreateAsync();
             await LoadItems(await _repository.GetAllToViewModel());
             // Initialize with object
             if (Counter > 0)

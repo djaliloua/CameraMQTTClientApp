@@ -6,6 +6,8 @@ using System.Diagnostics;
 using The49.Maui.BottomSheet;
 using Camera.MAUI;
 using UraniumUI;
+using Microsoft.Maui.LifecycleEvents;
+using Microsoft.Identity.Client;
 
 namespace MauiCamMqttClient
 {
@@ -27,9 +29,17 @@ namespace MauiCamMqttClient
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
                 //.UseCameraScanner()
-                .ConfigureMauiHandlers(handlers =>
+                .ConfigureLifecycleEvents(events =>
                 {
-                    //handlers.AddHandler(typeof(CameraBarcodeReaderView), typeof(CameraBarcodeReaderViewHandler));
+#if ANDROID
+                    events.AddAndroid(platform =>
+                    {
+                        platform.OnActivityResult((activity, rc, result, data) =>
+                        {
+                            AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(rc, result, data);
+                        });
+                    });
+#endif
                 })
                 .ConfigureFonts(fonts =>
                 {

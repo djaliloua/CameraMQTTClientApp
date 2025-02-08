@@ -3,6 +3,8 @@ using BaseViewModels.BaseModel;
 using CommunityToolkit.Mvvm.Messaging;
 using MauiCamMqttClient.MVVM.Views;
 using MauiCamMqttClient.MVVM.Views.BottomSheet;
+using Microsoft.Datasync.Client;
+using Microsoft.Identity.Client;
 using MqttClientService;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -28,7 +30,9 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             get => field;
             set => UpdateObservable(ref field, value);
         }
-       
+
+        
+
 
         #region Commands
         public ICommand NewCommand { get; private set; }
@@ -41,6 +45,7 @@ namespace MauiCamMqttClient.MVVM.ViewModels
         #region Constructor
         public MainViewModel(IMqttService mqttService)
         {
+             
 #if ANDROID
             WeakReferenceMessenger.Default.Register<string>("orientation", (sender, msg) =>
             {
@@ -64,7 +69,9 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             //StopStreamCommand = new Command(OnStopStream);
             ShowCamSettingCommand = new Command(OnShowCamSetting);
         }
-#endregion
+        #endregion
+
+        
 
         private async void OnShowCamSetting(object parameter)
         {

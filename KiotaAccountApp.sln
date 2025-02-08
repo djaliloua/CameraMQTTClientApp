@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseViewModels", "BaseViewM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAIClient", "OpenAIClient\OpenAIClient.csproj", "{A94931A7-A87B-46AE-A6FF-BF042C8818AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenService", "TokenService\TokenService.csproj", "{486D8C95-715B-47B8-88BB-BEE6BA3362D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -305,6 +307,24 @@ Global
 		{A94931A7-A87B-46AE-A6FF-BF042C8818AD}.Unicode Debug|x64.Build.0 = Debug|Any CPU
 		{A94931A7-A87B-46AE-A6FF-BF042C8818AD}.Unicode Debug|x86.ActiveCfg = Debug|Any CPU
 		{A94931A7-A87B-46AE-A6FF-BF042C8818AD}.Unicode Debug|x86.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Debug|x86.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|x64.Build.0 = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Release|x86.Build.0 = Release|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|x64.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|x64.Build.0 = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|x86.ActiveCfg = Debug|Any CPU
+		{486D8C95-715B-47B8-88BB-BEE6BA3362D2}.Unicode Debug|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

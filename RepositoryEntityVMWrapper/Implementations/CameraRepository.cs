@@ -6,33 +6,48 @@ using Repository;
 using RepositoryEntityVmAdpter.Abstractions;
 using Models;
 using System.Net.Security;
+using System.Net.Http.Headers;
+using TokenService;
 
 namespace RepositoryEntityVmAdpter.Implementations
 {
     public class CameraRepositoryApi : ICameraRepoApi
     {
         private readonly IClient _apiService;
+        
         public CameraRepositoryApi(DbContext dbContext) : base(dbContext)
         {
 
         }
-        public CameraRepositoryApi()
+        
+        public static async Task<CameraRepositoryApi> CreateAsync()
         {
+
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, certChain, policyErrors) =>
                 {
                     if (policyErrors == SslPolicyErrors.RemoteCertificateNameMismatch)
                     {
-                        // Log the issue (optional)
-                        //Console.WriteLine("Ignoring RemoteCertificateNameMismatch");
+                        // Optional logging
+                        // Console.WriteLine("Ignoring RemoteCertificateNameMismatch");
                     }
 
                     // Ignore all certificate errors in development
                     return true;
                 }
             };
-            _apiService = new Client("https://192.168.1.131:5001", new HttpClient(handler));
+
+            var http = new HttpClient(handler);
+            var tokenResult = await new TokenService.TokenService().GetAuthenticationToken(); // Await the token asynchronously
+            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenResult.Token);
+
+            var apiService = new Client("https://192.168.1.131:5001", http);
+            return new CameraRepositoryApi(apiService);
+        }
+        public CameraRepositoryApi(IClient apiService)
+        {
+            _apiService = apiService;
         }
         public override async Task<IList<MQTTConfigViewModel>> GetAllToViewModel()
         {

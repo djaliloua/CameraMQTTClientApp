@@ -5,6 +5,7 @@ using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using MauiIcons.Material;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Models;
 using MqttClientService;
 using Patterns.Abstractions;
@@ -59,6 +60,7 @@ namespace MauiCamMqttClient.Extensions
         {
             mauiAppBuilder.Services.AddMapster();
             mauiAppBuilder.Services.AddSingleton<IMqttService, MqttService>();
+            mauiAppBuilder.Services.AddSingleton<IPublicClientApplication, PublicClientApplication>();
             return mauiAppBuilder;
         }
         public static MauiAppBuilder LoadBIExtension(this MauiAppBuilder mauiAppBuilder)

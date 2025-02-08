@@ -1,5 +1,7 @@
 using DatabaseContexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -19,6 +21,10 @@ public class Program
             .AddEnvironmentVariables();
 
         builder.AddServiceDefaults();
+        // Authentication
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddMicrosoftIdentityWebApi(builder.Configuration);
+        builder.Services.AddAuthorization();
         builder.Services.AddTransient<MQTTConfigContext>();
         //builder.Services.AddDbContext<MQTTConfigContext>(option =>
         //{
@@ -92,6 +98,7 @@ public class Program
         app.MapDefaultEndpoints();
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
         ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
         app.RunMigrations(logger);

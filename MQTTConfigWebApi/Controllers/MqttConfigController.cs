@@ -8,7 +8,7 @@ namespace MQTTConfigWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
+    [Authorize]
     public class MqttConfigController : ControllerBase
     {
         private readonly ILogger<MqttConfigController> _logger;
@@ -21,14 +21,14 @@ namespace MQTTConfigWebApi.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public IEnumerable<MQTTConfig> GetAll()
         {
             using var _repository = new MQTTConfigRepository(_context);
             return _repository.GetAll();
         }
         [HttpGet("app/{guid}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> GetMQTTConfigByGuid(Guid guid)
         {
             using var repository = new MQTTConfigRepository(_context);
@@ -43,7 +43,7 @@ namespace MQTTConfigWebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> GetMQTTConfigById(int id)
         {
             using var repository = new MQTTConfigRepository(_context);
@@ -57,7 +57,7 @@ namespace MQTTConfigWebApi.Controllers
             return config;
         }
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> PostMQTTConfig(MQTTConfig purchase)
         {
             using var repository = new MQTTConfigRepository(_context);
@@ -65,7 +65,7 @@ namespace MQTTConfigWebApi.Controllers
             return purchase;
         }
         [HttpDelete("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteMQTTConfig(int id)
         {
             using var repository = new MQTTConfigRepository(_context);
@@ -74,7 +74,7 @@ namespace MQTTConfigWebApi.Controllers
             return NoContent();
         }
         [HttpPut("{id}")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult<MQTTConfig>> PutMQTTConfig(int id, MQTTConfig model)
         {
             if (model.Id != id)
