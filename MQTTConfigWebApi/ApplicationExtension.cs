@@ -42,7 +42,7 @@ namespace MQTTConfigWebApi
                         CameraId = Guid.Parse("8F102BDD-B337-4FC7-B24D-A493E32CFAAE"),
                         Port = "1883",
                         BaseTopicName = "video/stream/home",
-                        UserName = "your_username",
+                        UserName = "video/home/room",
                         Password = "801490",
                         Name = "Hive"
                     });

@@ -103,7 +103,7 @@ namespace MauiCamMqttClient.Extensions
                         HostName = "broker.hivemq.com",
                         CameraId = Guid.Parse("8F102BDD-B337-4FC7-B24D-A493E32CFAAE"),
                         Port = "1883",
-                        BaseTopicName = "video/stream/home",
+                        BaseTopicName = "video/home/room",
                         UserName = "your_username",
                         Password = "801490",
                         Name = "Hive"
