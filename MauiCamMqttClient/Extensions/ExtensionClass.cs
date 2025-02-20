@@ -5,6 +5,7 @@ using MauiCamMqttClient.MVVM.ViewModels;
 using MauiCamMqttClient.MVVM.ViewModels.Pages;
 using MauiIcons.Material;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Models;
 using MqttClientService;
 using Patterns.Abstractions;
@@ -59,6 +60,7 @@ namespace MauiCamMqttClient.Extensions
         {
             mauiAppBuilder.Services.AddMapster();
             mauiAppBuilder.Services.AddSingleton<IMqttService, MqttService>();
+            mauiAppBuilder.Services.AddSingleton<IPublicClientApplication, PublicClientApplication>();
             return mauiAppBuilder;
         }
         public static MauiAppBuilder LoadBIExtension(this MauiAppBuilder mauiAppBuilder)
@@ -101,7 +103,7 @@ namespace MauiCamMqttClient.Extensions
                         HostName = "broker.hivemq.com",
                         CameraId = Guid.Parse("8F102BDD-B337-4FC7-B24D-A493E32CFAAE"),
                         Port = "1883",
-                        BaseTopicName = "video/stream/home",
+                        BaseTopicName = "video/home/room",
                         UserName = "your_username",
                         Password = "801490",
                         Name = "Hive"

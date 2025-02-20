@@ -8,15 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Datasync.Client" Version="6.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.68.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BaseViewModels\BaseViewModels.csproj" />
-    <ProjectReference Include="..\OpenAIClient\OpenAIClient.csproj" />
-    <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\TokenService\TokenService.csproj" />
   </ItemGroup>
 
 </Project>

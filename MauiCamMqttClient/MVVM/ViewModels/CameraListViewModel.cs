@@ -24,10 +24,11 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             bool result = await Shell.Current.DisplayAlert("Info", $"Do you want to delete {cameraViewModel.Name}", "Yes", "No");
             if (result)
             {
+                //await ListOfCamera.Delete(cameraViewModel);
 #if DEBUG
                 ListOfCamera.Delete(cameraViewModel, ServiceLocator.MQTTConfigContext);
 #else
-                ListOfCamera.Delete(cameraViewModel);
+                                ListOfCamera.Delete(cameraViewModel);
 #endif
             }
         }
