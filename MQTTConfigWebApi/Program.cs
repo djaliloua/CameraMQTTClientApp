@@ -1,7 +1,4 @@
 using DatabaseContexts;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -22,26 +19,30 @@ public class Program
 
         builder.AddServiceDefaults();
         // Authentication
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(builder.Configuration);
-        builder.Services.AddAuthorization();
+        //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //    .AddMicrosoftIdentityWebApi(builder.Configuration);
+    //    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    //.AddJwtBearer(options =>
+    //{
+    //    options.RequireHttpsMetadata = false;
+    //    options.TokenValidationParameters = new TokenValidationParameters
+    //    {
+    //        ValidateIssuer = true,
+    //        ValidateAudience = false,
+    //        ValidateLifetime = true,
+    //        ValidateIssuerSigningKey = true,
+    //        ValidIssuer = "http://127.0.0.1:8000/oauth2",
+    //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("django-insecure-#2!by5lc!zlh0trex$c#0vhm94t5d@#u0z%@0#b(d@34x+gjco"))
+    //    };
+    //});
+
+    //    builder.Services.AddAuthorization();
         builder.Services.AddTransient<MQTTConfigContext>();
         //builder.Services.AddDbContext<MQTTConfigContext>(option =>
         //{
         //    option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
         //});
         builder.Logging.AddConsole();
-
-        //builder.Services.AddCors(options =>
-        //{
-        //    options.AddPolicy("AllowSpecificOrigin",
-        //        builder =>
-        //        {
-        //            builder.WithOrigins("http://0.0.0.0:5000") // Replace with your client URL
-        //                   .AllowAnyHeader()
-        //                   .AllowAnyMethod();
-        //        });
-        //});
 
         builder
             .Services

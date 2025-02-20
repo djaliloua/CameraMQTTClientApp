@@ -33,14 +33,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             if (CameraFrm.Error == null)
             {
                 //
-                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
+                //await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
 
-                //#if DEBUG
-                //                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm, ServiceLocator.MQTTConfigContext);
+#if DEBUG
+                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm, ServiceLocator.MQTTConfigContext);
 
-                //#else
-                //                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
-                //#endif
+#else
+                                await ServiceLocator.CameraComboBoxItemViewModel.Items.Update(CameraFrm);
+#endif
                 await Shell.Current.GoToAsync("..");
             }
             else
@@ -54,14 +54,14 @@ namespace MauiCamMqttClient.MVVM.ViewModels
             {
                 if (!CheckDuplicateName(CameraFrm.Name))
                 {
-                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
-//#if DEBUG
-//                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm, ServiceLocator.MQTTConfigContext);
+                    //await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
+#if DEBUG
+                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm, ServiceLocator.MQTTConfigContext);
 
-//#else
-//                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
-//#endif
-                    
+#else
+                    await ServiceLocator.CameraComboBoxItemViewModel.Items.Add(CameraFrm);
+#endif
+
 
                     await Shell.Current.GoToAsync("..");
                 }

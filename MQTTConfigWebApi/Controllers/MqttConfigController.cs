@@ -8,7 +8,7 @@ namespace MQTTConfigWebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
     public class MqttConfigController : ControllerBase
     {
         private readonly ILogger<MqttConfigController> _logger;
